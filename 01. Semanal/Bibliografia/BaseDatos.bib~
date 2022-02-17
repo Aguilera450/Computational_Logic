@@ -1,0 +1,24 @@
+@ELECTRONIC{TPERAZA,
+author = {{TPERAZA}},
+year = {20 de {M}arzo de 2016},
+title = {\texttt{https://tperaza.wordpress.com/2016/03/20/logica-computacional/}}
+}
+
+@BOOK{CA,
+author = {Avella, Diana and Campero, Gabriela},
+year = 2017,
+title = {Curso Introductorio de \'Algebra I},
+edition = 1,
+publisher = {PAPIRHOS},
+adress = {M\'exico, CDMX}
+}
+
+@article{FHQ,
+author = {Hernández Quiroz, Francisco},
+title = {Análisis lógico},
+journal = {Notas de clase},
+year = {{M}ayo del 2002},
+number = 01,
+pages = 67,
+volume = 1
+}

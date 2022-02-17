@@ -1,0 +1,184 @@
+\documentclass{article}
+
+% Symbols
+\usepackage{amsfonts, amsthm}
+\usepackage{upgreek}
+\usepackage{physics}
+\usepackage{cancel}
+\usepackage{amssymb, latexsym, amsmath}
+
+%Algorithms
+\usepackage[ruled,lined,linesnumbered,commentsnumbered]{algorithm2e}
+
+%% Identación
+\setlength{\parindent}{0cm}
+
+% Código
+\newcommand{\code}[1]{\textcolor{white!25!black}{\texttt{#1}}}
+\usepackage{listings}
+
+%AMS
+\usepackage{amsthm}
+\newtheorem{algo-thm}{Algoritmo}
+
+% Proof
+\renewcommand*{\proofname}{\textbf{Demostraci\'on:}}
+% Theorem
+\newtheorem*{theorem}{Teorema}
+
+% Graphics
+\usepackage{graphicx}
+\usepackage{pgf}
+
+% Color a letras.
+%\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+
+% Tikz
+\usepackage{tkz-graph}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata}
+%\usetikzlibrary[topaths]
+
+% Def. Dr. César.
+\usetikzlibrary{shapes,calc}
+\tikzstyle{edge}=[shorten <=2pt, shorten >=2pt, >=stealth, line width=1.1pt]
+\tikzstyle{blueE}=[shorten <=2pt, shorten >=2pt, >=stealth, line width=1.5pt, blue]
+\tikzstyle{blackV}=[circle, fill=black, minimum size=6pt, inner sep=0pt, outer sep=0pt]
+\tikzstyle{blueV}=[circle, fill=blue, draw, minimum size=6pt, line width=0.75pt, inner sep=0pt, outer sep=0pt]
+\tikzstyle{redV}=[circle, fill=red, draw, minimum size=6pt, line width=0.75pt, inner sep=0pt, outer sep=0pt]
+\tikzstyle{redSV}=[semicircle, fill=red, minimum size=3pt, inner sep=0pt, outer sep=0pt, rotate=225]
+\tikzstyle{blueSV}=[semicircle, fill=blue, minimum size=3pt, inner sep=0pt, outer sep=0pt, rotate=225]
+\tikzstyle{blackSV}=[semicircle, fill=black, minimum size=3pt, inner sep=0pt, outer sep=0pt, rotate=225]
+\tikzstyle{vertex}=[circle, draw, minimum size=6pt, line width=0.75pt, inner sep=0pt, outer sep=0pt]
+
+% Margins
+\addtolength{\voffset}{-1.5cm}
+\addtolength{\hoffset}{-1.5cm}
+\addtolength{\textwidth}{3cm}
+\addtolength{\textheight}{3cm}
+
+%Header-Footer
+\usepackage{fancyhdr}
+\renewcommand{\headrulewidth}{1pt}
+
+\newcommand{\set}[1]{
+  \left\{ #1 \right\}
+}
+
+%\pagenumbering{gobble} -- Este comando
+%                       -- quita el número de página.
+\footskip = 50pt
+\renewcommand{\headrulewidth}{1pt}
+
+\pagestyle{fancyplain}
+
+%% Bibliografía APA
+\usepackage[backend=biber]{biblatex}
+\bibliography{./Bibliografia/BaseDatos}
+
+\begin{document}
+\title{UNIVERSIDAD AUT\'ONOMA DE M\'EXICO\\ Facultad de Ciencias}
+\author{Autor: Adri\'an Aguilera Moreno}
+\date{}
+\maketitle
+\begin{center}
+  \includegraphics[scale=0.20]{../Imagen/Portada.jpg}\\[0.4cm]
+  \Large
+  \bf{Lógica Computacional}
+  \normalsize
+\end{center}
+\newpage
+\fancyhead[r]{ Lógica Computacional 2022-2}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{\LARGE{Semanal 1}}
+\begin{enumerate}
+\item Escribe un ensayo sobre qué crees que es la Lógica Computacional
+  y cómo te servirá a lo largo de la carrera y/o en el ámbito laboral.
+  
+  Desde que estudié los cursos como \textit{Estructuras Discretas} y
+  \textit{Álgebra Superior I}, puede notar que la lógica (en general)
+  es la que nos ayuda a realizar demostraciones, y algunos procesos
+  que se basan en las ideas de demostrar preposiciones, otro clásico
+  sería la recursión (explicado en ocaciones como procesos inductivos
+  que basan en el teorema de la recursión). En la carrera, estas
+  materias me han ayudado en gran parte a no morir en otras como;
+  \textit{Gráficas y Juegos}, \textit{Álgebra Superior II},
+  \textit{Álgebra Lineal I}, \textit{Probabilidad I}, etc. La lógica
+  matemática fundamenta gran parte de la teoría detr\'as de la computación,
+  un ejemplo de esto fue demostrar algoritmos, para estos realmente
+  se busca hacer una inducción, ya sea bajo la base (definición) recursiva
+  o con el invariante de ciclo en el caso iterativo, los mismo pasa
+  cuando se buscan algunas características en gráficas, para esto debemos
+  tener claras las definiciones de tablas de verdad, y los operadores
+  binarios, de otra manera estaría muy manchado intentar demostrar
+  proposiciones (o lo que busque demostrar).
+  
+  ``El trabajo matemático exige razonar y argumentar en forma válida
+  acerca de hechos generalmente abstractos. Para ayudarnos en esta
+  tarea necesitamos eliminar las ambigüedades del lenguaje ordinario
+  introduciendo símbolos y conectivos cuyo uso adecuado aportará claridad
+  y presición''~\cite{CA}. Buena parte de la carrera en Ciencias de la
+  Computación se basa en adquirir formalismos matemáticos, en gran parte
+  la lógica computacional se basará en su sintaxis, esto es el referente
+  justo en el que buscaremos expresarnos con claridad.
+  
+    ``La lógica computacional es la misma lógica matemática aplicada a un
+  contexto de las ciencias de la computación. Su uso es fundamental a
+  varios niveles como en los circuitos computacionales, en la programación
+  lógica y en el análisis de algoritmos''~\cite{TPERAZA}. De esta manera
+  durante la carrera, al menos, se empleará la lógica computacional en materias
+  como lo son; \textit{Organización y Aqruitectura de Computadoras},
+  \textit{Análisis de algoritmos}, \textit{Lengiajes de programación} (respecto
+  al paradigma lógico), y en general en las materias de computación teórica.
+  Sin embargo no sólo nos limitaremos al uso la lógica computacional para la
+  parte de computación teórica (que no siempre es tan teórica), pues programar
+  de manera lógica nos aporta un plus, un ejemplo de esto sería el poder
+  definir un método (en Java por ejemplo) que búsque un nodo en un árbol
+  binario ordenado, entonces podemos definir este método de manera iterativa
+  o implementarlo con un método auxiliar (que haga la recursión) para
+  de esta  manera pasar a código casi, casi la definición de árbol binario
+  ordenado (esto no necesariamente es lo más eficiente, sin embargo se puede
+  implementar así).
+  
+  Recuerdo que en \textit{Estructuras Discretas} vimos algo de lógica de
+  predicados, entonces podiamos analizar párrafos enteros al dividirlos
+  en proposiciones atómicas y de esta manera encontrar si la combinación
+  de estas era una tautología (en ese caso el predicado era correcto),
+  una contingencia (en este caso el predicado se ve condicionado a algunos
+  valores de verdad) o era una contradicción (en este caso el predicado
+  siempre es incorrecto). Así, la lógica nos regala una manera distinta
+  de analizar textos, y en partícular, de no caer en ambigüedades del
+  lenguaje.
+  
+  ``Un estilo de programación radicalmente distinto al imperativo es el
+  funcional. A riesgo de simpliﬁcar, la idea básica es que en lugar de
+  programas con instrucciones detalladas a la computadora, se deben usar
+  deﬁniciones de funciones y aplicaciones de éstas a argumentos
+  dados''~\cite{FHQ}. Es en este tipo de programación donde se hace uso
+  en gran medida de la lógica computacional, si no hay buenas bases, tal
+  vez no se logre entender porque una línea particular del código funciona.
+  En este caso es claro que no solo estamos involucrando lo académico,
+  pues lenguajes puramente funcionales como \textit{Haskell} se emplean
+  hoy en día en la industria; en criptoánalisis, desarrollo web, compiladores,
+  etc. Luego, existen otros con multiparadigma como \textit{Phyton} que
+  es muy popular por la simpleza de su sintaxis. Es aquí cuando podemos
+  notar la importancia de la lógica computacional en miras del futuro
+  después de la carrera.
+  
+  En conclusión, siempre estamos utilizando la lógica matemática (aunque
+  sea de una manera intuitiva), en nuestro caso partícular (como Científicos
+  de la Computación), la usamos a diario, desde abstraer una definición
+  hasta realizar la implementación de algún algoritmo.
+  
+  Con toda certeza sé que no abarco todo lo que se puede hacer con la
+  lógica computacional, sin embargo esto es parte de lo que hoy conozco
+  al respecto, tengo grandes espectativas del curso y espero pronto
+  conocer muchas otras aplicaciones en el mundo académico y laboral.
+  
+  \\
+  
+  \printbibliography
+\end{enumerate}
+\end{document}
