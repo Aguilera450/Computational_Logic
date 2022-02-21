@@ -1,0 +1,140 @@
+\documentclass{article}
+
+% Symbols
+\usepackage{amsfonts, amsthm}
+\usepackage{upgreek}
+\usepackage{physics}
+\usepackage{cancel}
+\usepackage{amssymb, latexsym, amsmath}
+
+%Algorithms
+\usepackage[ruled,lined,linesnumbered,commentsnumbered]{algorithm2e}
+
+%% Identación
+\setlength{\parindent}{0cm}
+
+% Código
+\newcommand{\code}[1]{\textcolor{white!25!black}{\texttt{#1}}}
+\usepackage{listings}
+
+%AMS
+\usepackage{amsthm}
+\newtheorem{algo-thm}{Algoritmo}
+
+% Proof
+\renewcommand*{\proofname}{\textbf{Demostraci\'on:}}
+% Theorem
+\newtheorem*{theorem}{Teorema}
+
+% Graphics
+\usepackage{graphicx}
+\usepackage{pgf}
+
+% Color a letras.
+%\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+
+% Tikz
+\usepackage{tkz-graph}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata}
+%\usetikzlibrary[topaths]
+
+% Def. Dr. César.
+\usetikzlibrary{shapes,calc}
+\tikzstyle{edge}=[shorten <=2pt, shorten >=2pt, >=stealth, line width=1.1pt]
+\tikzstyle{blueE}=[shorten <=2pt, shorten >=2pt, >=stealth, line width=1.5pt, blue]
+\tikzstyle{blackV}=[circle, fill=black, minimum size=6pt, inner sep=0pt, outer sep=0pt]
+\tikzstyle{blueV}=[circle, fill=blue, draw, minimum size=6pt, line width=0.75pt, inner sep=0pt, outer sep=0pt]
+\tikzstyle{redV}=[circle, fill=red, draw, minimum size=6pt, line width=0.75pt, inner sep=0pt, outer sep=0pt]
+\tikzstyle{redSV}=[semicircle, fill=red, minimum size=3pt, inner sep=0pt, outer sep=0pt, rotate=225]
+\tikzstyle{blueSV}=[semicircle, fill=blue, minimum size=3pt, inner sep=0pt, outer sep=0pt, rotate=225]
+\tikzstyle{blackSV}=[semicircle, fill=black, minimum size=3pt, inner sep=0pt, outer sep=0pt, rotate=225]
+\tikzstyle{vertex}=[circle, draw, minimum size=6pt, line width=0.75pt, inner sep=0pt, outer sep=0pt]
+
+% Margins
+\addtolength{\voffset}{-1.5cm}
+\addtolength{\hoffset}{-1.5cm}
+\addtolength{\textwidth}{3cm}
+\addtolength{\textheight}{3cm}
+
+%Header-Footer
+\usepackage{fancyhdr}
+\renewcommand{\headrulewidth}{1pt}
+
+\newcommand{\set}[1]{
+  \left\{ #1 \right\}
+}
+
+%\pagenumbering{gobble} -- Este comando
+%                       -- quita el número de página.
+\footskip = 50pt
+\renewcommand{\headrulewidth}{1pt}
+
+\pagestyle{fancyplain}
+
+\begin{document}
+\title{UNIVERSIDAD AUT\'ONOMA DE M\'EXICO\\ Facultad de Ciencias}
+\author{Autor: Adri\'an Aguilera Moreno}
+\date{}
+\maketitle
+\begin{center}
+  \includegraphics[scale=0.20]{../Imagen/Portada.jpg}\\[0.4cm]
+  \Large
+  \bf{Lógica Computacional}
+  \\
+
+  \normalsize
+  \begin{center}
+    \fbox{
+      \begin{minipage}[b][1\height]%
+        [t]{0.867\textwidth}
+        La propuesta de estos boletines fue hecha por:
+        \begin{itemize}
+        \item Dr. Favio E. Miranda Parea.
+        \item Dra. Lourdes González Huesca.
+        \item Mtra. A. Liliana Reyes Cabello.
+        \end{itemize}
+    \end{minipage}}
+  \end{center}
+\end{center}
+\newpage
+\fancyhead[r]{ Lógica Computacional 2022-2}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{\LARGE{Boletín 1}}
+\begin{enumerate}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%% Ejercicio 01  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Elimina los paréntesis innecesarios en las siguientes expresiones:
+  \begin{itemize}
+  \item[$a$)] $\left((p \lor q) \rightarrow r\right) \leftrightarrow \left((\neg r) \rightarrow (\neg (p \lor q))\right)$
+  \item[$b$)] $\neg \left(((p \land (p \rightarrow (\neg p))) \land q) \land p\right)$
+  \item[$c$)] $\left(p \rightarrow (q \land (\neg q)) \right) \rightarrow \left((\neg p) \rightarrow p\right)$
+  \item[$d$)] $(\neg s) \rightarrow \left((\neg t) \land \neg (p \lor q)\right)$
+  \end{itemize}
+  
+  $\triangledown$ \textbf{Solución:}
+  
+  \begin{eqnarray*}
+    &(a)& p \lor q \rightarrow r \leftrightarrow \neg r \rightarrow \neg (p \lor q)\\
+    &(b)& \neg (p \land (p \rightarrow \neg q) \land q \land p)\\
+    &(c)& (p \rightarrow q \land \neg q) \rightarrow (\neg p \rightarrow p)\\
+    &(d)& \neg s \rightarrow \neg t \land \neg (p \lor q)
+  \end{eqnarray*}
+  \hfill $\lhd$
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%% Ejercicio 02  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Definie las siguientes funciones, indicando claramente en cada caso el dominio
+  y contradominio de la función definida:
+  \begin{itemize}
+  \item[$a$)] Profundidad de una fórmula: \textit{depth}$(\varphi)$ devuelve la
+    profundidad o altura del árbol de análisis sintáctico de $\varphi$.
+  \item[$b$)] Números de conectivos de una fórmula: \textit{con}$(\varphi)$
+    devuelve el número de conectivos de $\varphi$.
+  \item[$c$)] 
+  \item[$d$)] 
+  \item[$e$)] 
+  \item[$f$)] 
+  \item[$g$)] 
+  \end{itemize}
+\end{enumerate}
+\end{document}
