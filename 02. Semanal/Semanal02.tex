@@ -108,7 +108,146 @@
     \]
     Debes usar las funciones que definiste en los dos incisos anteriores.
   \end{itemize}
-  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Ejercicio 02  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  $\triangledown$ \textbf{Solución:}
+  \begin{itemize}
+  \item[$a$)] Sea $\varphi \in ATOM$, definimos $atom(\varphi) = 1$. De igual manera,
+    tenemos que
+    \[
+    atom(\top) = 1 = atom(\bot)
+    \]
+    Para $\phi, \gamma$ fórmulas en $PL$, definimos para los casos no atómicos (casos con
+    llamada recursiva), esto es
+    \begin{eqnarray*}
+      atom(\neg \phi) &=& atom(\phi)\\
+      atom(\phi \land \gamma) &=& atom(\phi) + atom(\gamma)\\
+      atom(\phi \lor \gamma) &=& atom(\phi) + atom(\gamma)\\
+      atom(\phi \Rightarrow \gamma) &=& atom(\phi) + atom(\gamma)\\
+      atom(\phi \Leftrightarrow \gamma) &=& atom(\phi) + atom(\gamma)
+    \end{eqnarray*}
+    Así, $atom: PL \rightarrow \mathbb{N}/\{0\}$. Nótese que el codominio de ``$atom$'' no puede
+    contener al $0$, pues $\{\{\neg\}, \{\land\}, \{\lor\}, \{\Rightarrow\}, \{\Leftrightarrow\}\}
+    \nsubseteq PL$\footnote{Por la definición recursiva de $PL$, el caso base se da cuando $\varphi
+    \in ATOM$.}.
+  \item[$b$)] Para $\varphi \in ATOM \cup \{\bot, \top\}$, definimos $con(\varphi) = 0$. Luego, para
+    $\phi, \gamma \in PL$, tenemos que
+    \begin{eqnarray*}
+      con(\neg \phi) &=& 1 + con(\phi)\\
+      con(\phi \land \gamma) &=& 1 + con(\phi) + con(\gamma)\\
+      con(\phi \lor \gamma) &=& 1 + con(\phi) + con(\gamma)\\
+      con(\phi \Rightarrow \gamma) &=& 1 + con(\phi) + con(\gamma)\\
+      con(\phi \Leftrightarrow \gamma) &=& 1 + con(\phi) + con(\gamma)
+    \end{eqnarray*}
+    De lo anterior podemos constatar que, $con: PL \rightarrow \mathbb{N}$.
+    
+    \begin{center}
+      \fbox{
+        \begin{minipage}[b][1\height]%
+          [t]{0.867\textwidth}
+          Nótese que, como
+          \[
+          \{\{\neg\}, \{\land\}, \{\lor\}, \{\Rightarrow\}, \{\Leftrightarrow\}\} \nsubseteq PL
+          \]
+          entonces no tendremos cosas como $con(\neg) = 1 = con(\land) = con(\lor) =
+          con(\Rightarrow) = con(\Leftrightarrow)$, es por esto que no entran en nuestro
+          caso base de la recursión.        
+      \end{minipage}}
+    \end{center}
+  \item[$c$)] \begin{proof}
+    Sea $\varphi \in ATOM \cup \{\bot, \top\}$, así
+    \begin{eqnarray*}
+      &\Rightarrow& atom(\varphi) \leq  con(\varphi) + 1
+      \hspace*{1cm} \text{Es lo que queremos ver.}\\
+      &\Rightarrow& atom(\varphi) \leq 0 + 1
+      \hspace*{1.9cm} \text{Por definición de ``\textit{con}''.}\\
+      &\Rightarrow& 1 \leq 1
+      \hspace*{3.5cm} \text{Por definición de ``\textit{atom}''.}
+    \end{eqnarray*}
+    Por la dicotomía de ``$\leq$'', tenemos que $1 = 1$ y se cumple lo anterior.
+    
+    Ahora, supongamos que para $\phi, \gamma$ fórmulas en $PL$ se cumple que
+    \begin{eqnarray*}
+      atom(\phi) &\leq& con(\phi) + 1\\
+      atom(\gamma) &\leq& con(\gamma) + 1
+    \end{eqnarray*}
+    luego, observemos los siguientes casos:
+    \begin{itemize}
+    \item[$\cdot$)] Negación. Supongamos sin pérdida de generalidad a $\phi$, así
+      \begin{eqnarray*}
+        atom(\neg \phi) &=& atom(\phi)
+        \hspace*{2.1cm} \text{Definición de ``\textit{atom}''.}\\
+        &\leq& con(\phi) + 1
+        \hspace*{1.3cm} \text{Por hipótesis de inducción.}\\
+        &=& con(\neg \phi)
+        \hspace*{2cm} \text{Por definición de ``\textit{con}''.}\\
+        &\leq& con(\neg \phi) + 1
+        \hspace*{0.5cm} \text{Por dicotomía de ``$\leq$'', tenemos ``$<$''.}
+      \end{eqnarray*}
+      \[
+      \therefore \; atom(\neg \phi) \leq con(\phi) + 1
+      \]
+    \item[$\cdot$)] Conjunción. Veamos que
+      \begin{eqnarray*}
+        atom(\phi \land \gamma) &=& atom(\phi) + atom(\gamma)
+        \hspace*{2.1cm} \text{Por definición de ``$atom$''.}\\
+        &\leq& (con(\phi) + 1) + (con(\gamma) + 1)
+        \hspace*{1cm} \text{Por hipótesis inductiva.}\\
+        &=& (1 + con(\phi) + con(\gamma)) + 1
+        \hspace*{1.1cm} \text{Asociatividad en la suma.}\\
+        &=& con(\phi \land \gamma) + 1
+        \hspace*{3.4cm} \text{Definición de ``\textit{con}''.}
+      \end{eqnarray*}
+      \[
+      \therefore \; atom(\phi \land \gamma) \leq con(\phi \land \gamma) + 1
+      \]
+    \item[$\cdot$)] Disyunción. Observemos que
+      \begin{eqnarray*}
+        atom(\phi \lor \gamma) &=& atom(\phi) + atom(\gamma)
+        \hspace*{2.1cm} \text{Por definición de ``$atom$''.}\\
+        &\leq& (con(\phi) + 1) + (con(\gamma) + 1)
+        \hspace*{1cm} \text{Por hipótesis inductiva.}\\
+        &=& (1 + con(\phi) + con(\gamma)) + 1
+        \hspace*{1.1cm} \text{Asociatividad en la suma.}\\
+        &=& con(\phi \lor \gamma) + 1
+        \hspace*{3.4cm} \text{Definición de ``\textit{con}''.}
+      \end{eqnarray*}
+      \[
+      \therefore \; atom(\phi \lor \gamma) \leq con(\phi \lor \gamma) + 1
+      \]
+    \item[$\cdot$)] Implicación simple. Tenemos que
+      \begin{eqnarray*}
+        atom(\phi \Rightarrow \gamma) &=& atom(\phi) + atom(\gamma)
+        \hspace*{2.1cm} \text{Por definición de ``$atom$''.}\\
+        &\leq& (con(\phi) + 1) + (con(\gamma) + 1)
+        \hspace*{1cm} \text{Por hipótesis inductiva.}\\
+        &=& (1 + con(\phi) + con(\gamma)) + 1
+        \hspace*{1.1cm} \text{Asociatividad en la suma.}\\
+        &=& con(\phi \Rightarrow \gamma) + 1
+        \hspace*{3.3cm} \text{Definición de ``\textit{con}''.}
+      \end{eqnarray*}
+      \[
+      \therefore \; atom(\phi \Rightarrow \gamma) \leq con(\phi \Rightarrow \gamma) + 1
+      \]
+    \item[$\cdot$)] Bicondicional. Notemos que
+      \begin{eqnarray*}
+        atom(\phi \Leftrightarrow \gamma) &=& atom(\phi) + atom(\gamma)
+        \hspace*{2.1cm} \text{Por definición de ``$atom$''.}\\
+        &\leq& (con(\phi) + 1) + (con(\gamma) + 1)
+        \hspace*{1cm} \text{Por hipótesis inductiva.}\\
+        &=& (1 + con(\phi) + con(\gamma)) + 1
+        \hspace*{1.1cm} \text{Asociatividad en la suma.}\\
+        &=& con(\phi \Leftrightarrow \gamma) + 1
+        \hspace*{3.3cm} \text{Definición de ``\textit{con}''.}
+      \end{eqnarray*}
+      \[
+      \therefore \; atom(\phi \Leftrightarrow \gamma) \leq con(\phi \Leftrightarrow \gamma) + 1
+      \]
+    \end{itemize}
+  \end{proof}
+  \end{itemize}
+%
+\hfill $\lhd$
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Ejercicio 02  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \item Para cada uno de los siguientes ejercicios, \textbf{justifica ampliamente}
   tu respuesta.
   \begin{itemize}
@@ -121,6 +260,31 @@
     icd(p \land (q \lor \neg r) \rightarrow \neg (r \lor s) \land t)
     \]
   \end{itemize}
+  $\triangledown$ \textbf{Solución:}
+  Analicemos ambos incisos:
+  \begin{itemize}
+  \item[$\square$] Sea $\varphi \in ATOM$, entonces definimos a $icd(\varphi) = \varphi$. En
+    general, para $\phi, \gamma$ fórmulas en $PL$ se tiene que
+    \begin{eqnarray*}
+      icd(\neg \phi) &=& \neg icd(\phi)\\
+      icd(\phi \land \gamma) &=& icd(\phi) \lor icd(\gamma)\\
+      icd(\phi \lor \gamma) &=& icd(\phi) \land icd(\gamma)\\
+      icd(\phi \Rightarrow \gamma) &=& icd(\phi) \Rightarrow icd(\gamma)\\
+      icd(\phi \Leftrightarrow \gamma) &=& icd(\phi) \Leftrightarrow icd(\gamma)
+    \end{eqnarray*}
+    así, $icd: PL \rightarrow PL$ [por la definición recursiva de $PL$].
+  \item[$\square$] Ahora, verifiquemos la definición anterior con el siguiente
+    caso particular, esto es
+  \end{itemize}
+  \begin{eqnarray*}
+    icd(p \land (q \lor \neg r) \rightarrow \neg (r \lor s) \land t) &=&
+    icd(p \land (q \lor \neg r)) \rightarrow icd(\neg (r \lor s) \land t))\\
+    &=& icd(p) \lor icd((q \lor \neg r)) \rightarrow icd(\neg (r \lor s)) \lor icd(t)\\
+    &=& p \lor (icd(q) \land icd(\neg r)) \rightarrow \neg icd((r \lor s)) \lor t\\
+    &=& p \lor (q \land \neg icd(r)) \rightarrow \neg (icd(r) \land icd(s)) \lor t\\
+    &=& p \lor (q \land \neg r) \rightarrow \neg (r \land s) \lor t
+  \end{eqnarray*}
+  \hfill $\lhd$
 \end{enumerate}
 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Extra  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -138,4 +302,38 @@ de 1000kg, algo que claramente ya no puedes cargar.\guillemotright
 \hspace*{0.5cm} \textbf{Muestra}, si es posible, que el argumento es correcto utilizándo
 inducción. En caso contrario, \textbf{indica} en donde está el error en el razonamiento
 inductivo. \textbf{Justifica ampliamente tu respuesta}.
+\\
+
+$\triangledown$ \textbf{Solución:}
+Observemos que el enunciado tiene como conclusión al predicado: ``Pero después de un año,
+el becerro se va a convertir en una vaca adulta de 1000kg, algo que claramente ya no puedes
+cargar'', que se resume en ``El becerro se va a convertir en una vaca adulta de 1000kg''
+\textbf{y} ``algo que claramente ya no puedes cargar'', si nosotros suponemos que el argumento
+en general es válido, entonces se debe cumplir la conjunción anterior, entonces concluimos que
+\underline{no se puede cargar al becerro (vaca) después de un año} [en la conjunción ambos
+  conjuntos deben tener un valor de verdad $1$ o verdadero para que el enunciado sea válido].
+
+
+Así mostremos que el becerro después de un año aún se podrá cargar, esto por inducción en la
+cantidad de días que pasan.
+
+\textbf{Caso base:} ``El día que nace un becerro, cualquiera lo puede cargar con facilidad''.
+
+\textbf{Hipótesis de Inducción:} ``debería serte posible cargar al becerro el día siguiente
+y el siguiente y así sucesivamente''.
+
+\textbf{Paso de inducción:} Supongamos un día $x$ donde el becerro se pueda cargar, entonces
+el $sig(x) = y$ es un día, y por hipótesis de inducción tenemos que en el día $y$ se puede
+cargar el becerro. Así, todos los días se puede cargar al becerro, en particular cuando este
+tenga más de un año!!, he aquí un contradicción, pues habíamos notado que después de un año
+la vaca ya no podría ser cargada.
+\\
+
+Pero ¿dónde surge el error? El error surge de la hipótesis de inducción, si vemos al argumento
+como algo definido recursivamente, entonces podemos notar que su definición está hecha sin mayor
+cuidado, pues se hace en base a los días transcurrido sin percatarse del peso que adquiere día
+con día, y si bien la hipótesis es cierta para los primeros días, se deja de cumplir cuando
+el becerro alcanza un peso mayor a lo que es humanamente posible de cargar. Así, definir que el
+becerro se puede cargar el siguiente de un día en donde se puede cargar es incorrecto.
+\hfill $\lhd$
 \end{document}
