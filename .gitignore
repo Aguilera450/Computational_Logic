@@ -1,3 +1,6 @@
+*.md~
 *.aux
 *.log
+*.bcf
 *.tex~
+*.run.xml
