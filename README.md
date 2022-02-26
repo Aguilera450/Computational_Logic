@@ -24,6 +24,12 @@ que se imparte en la Facultad de Ciencias de la UNAM.
    * Razonamiento ecuacional.
    * Deducción natural.
    * Cálculo de secuentes y razonamiento hacia atrás.
+## Prácticas:
+Las prácticas de laboratorio se llevan a cabo en equipo, en este caso me he reunido con *Marco Silva Huerta*
+para trabajar dichas prácticas, estas se pueden encontrar en la siguiente liga:
+
+* [Prácticas.](https://github.com/Aguilera450/Practicas_LC.git)
+
 ## Bibliografía:
 * Nerode A., Shore R., Logic for applications, Springer.
 * Burris, Stanley, Logic for mathematics and computer science, Prentice Hall.
