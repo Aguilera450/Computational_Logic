@@ -33,6 +33,9 @@
 % Color a letras.
 %\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
 
+% << >>
+\usepackage[T1]{fontenc}
+
 % Tikz
 \usepackage{tkz-graph}
 \usepackage{tikz}
@@ -83,58 +86,45 @@
   \includegraphics[scale=0.20]{../Imagen/Portada.jpg}\\[0.4cm]
   \Large
   \bf{Lógica Computacional}
-  \\
-
   \normalsize
-  \begin{center}
-    \fbox{
-      \begin{minipage}[b][1\height]%
-        [t]{0.867\textwidth}
-        La propuesta de estos boletines fue hecha por:
-        \begin{itemize}
-        \item Dr. Favio E. Miranda Parea.
-        \item Dra. Lourdes González Huesca.
-        \item Mtra. A. Liliana Reyes Cabello.
-        \end{itemize}
-    \end{minipage}}
-  \end{center}
 \end{center}
 \newpage
 \fancyhead[r]{ Lógica Computacional 2022-2}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section*{\LARGE{Boletín 1}}
+\section*{\LARGE{Semanal 3}}
+Para cada uno de los siguientes ejercicios, \textbf{justifica ampliamente} tu respuesta.
 \begin{enumerate}
-  %%%%%%%%%%%%%%%%%%%%%%%%%%%% Ejercicio 01  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Elimina los paréntesis innecesarios en las siguientes expresiones:
+\item \textbf{Realiza} las siguientes sustituciones \textbf{eliminando} los paréntesis
+  superfluos en el resultado y \textbf{mostrando paso a paso} el procedimiento.
   \begin{itemize}
-  \item[$a$)] $\left((p \lor q) \rightarrow r\right) \leftrightarrow \left((\neg r) \rightarrow (\neg (p \lor q))\right)$
-  \item[$b$)] $\neg \left(((p \land (p \rightarrow (\neg p))) \land q) \land p\right)$
-  \item[$c$)] $\left(p \rightarrow (q \land (\neg q)) \right) \rightarrow \left((\neg p) \rightarrow p\right)$
-  \item[$d$)] $(\neg s) \rightarrow \left((\neg t) \land \neg (p \lor q)\right)$
+  \item[$a$)] $((q \lor r)[q, p := \neg p, s] \rightarrow (r \land \neg(r \leftrightarrow p)))[p, r, q := r \lor q, q \land p, s]$.
+  \item[$b$)] $(u \lor t) \rightarrow (\neg r \leftrightarrow (u \leftrightarrow s))[r, u, t := u, t, r]$.
   \end{itemize}
-  
-  $\triangledown$ \textbf{Solución:}
-  
-  \begin{eqnarray*}
-    &(a)& p \lor q \rightarrow r \leftrightarrow \neg r \rightarrow \neg (p \lor q)\\
-    &(b)& \neg (p \land (p \rightarrow \neg q) \land q \land p)\\
-    &(c)& (p \rightarrow q \land \neg q) \rightarrow (\neg p \rightarrow p)\\
-    &(d)& \neg s \rightarrow \neg t \land \neg (p \lor q)
-  \end{eqnarray*}
-  \hfill $\lhd$
-  %%%%%%%%%%%%%%%%%%%%%%%%%%%% Ejercicio 02  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item Definie las siguientes funciones, indicando claramente en cada caso el dominio
-  y contradominio de la función definida:
+\item
   \begin{itemize}
-  \item[$a$)] Profundidad de una fórmula: \textit{depth}$(\varphi)$ devuelve la
-    profundidad o altura del árbol de análisis sintáctico de $\varphi$.
-  \item[$b$)] Números de conectivos de una fórmula: \textit{con}$(\varphi)$
-    devuelve el número de conectivos de $\varphi$.
-  \item[$c$)] 
-  \item[$d$)] 
-  \item[$e$)] 
-  \item[$f$)] 
-  \item[$g$)] 
+  \item[$a$)] \textbf{Define recursivamente} la función $pa$ que dada una fórmula $\varphi$, devuelve el número
+    de paréntesis abiertos ``$($'' que tiene $\varphi$.
+  \item[$b$)] \textbf{Define recursivamente} la función $pc$ que dada una fórmula $\varphi$, devuelve el número
+    de paréntesis cerrados ``$)$'' que tiene $\varphi$.
+  \item[$c$)] Sea $\varphi = (((\neg p \land q) \lor \neg r) \rightarrow r)$. Demuestra que
+    \[
+    pa(\varphi) - pc(\varphi) = 0
+    \]
   \end{itemize}
 \end{enumerate}
+\textbf{Desafío extra...}
+\renewcommand{\labelitemi}{$-$}
+\begin{itemize}
+\item \textbf{Define recursivamente} una función compress que elimina los elementos consecutivos
+  repetidos de una lista.
+
+  Ejemplo:
+  \begin{center}
+    \code{compress([a,a,a,a,i,i,i,u,d,d,d,d,d,a,a,a,a,a,a,a]) = [a,i,u,d,a]}
+  \end{center}
+\item \textbf{Demuestra}, usando tu definición, que:
+  \begin{center}
+    \code{compress([1, 2, 2, 3, 3, 3]) = [1, 2, 3]}
+  \end{center}
+\end{itemize}
 \end{document}
