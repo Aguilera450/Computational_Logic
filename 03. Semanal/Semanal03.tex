@@ -94,12 +94,37 @@
 \section*{\LARGE{Semanal 3}}
 Para cada uno de los siguientes ejercicios, \textbf{justifica ampliamente} tu respuesta.
 \begin{enumerate}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Ejercicio 01
 \item \textbf{Realiza} las siguientes sustituciones \textbf{eliminando} los paréntesis
   superfluos en el resultado y \textbf{mostrando paso a paso} el procedimiento.
   \begin{itemize}
   \item[$a$)] $((q \lor r)[q, p := \neg p, s] \rightarrow (r \land \neg(r \leftrightarrow p)))[p, r, q := r \lor q, q \land p, s]$.
   \item[$b$)] $(u \lor t) \rightarrow (\neg r \leftrightarrow (u \leftrightarrow s))[r, u, t := u, t, r]$.
   \end{itemize}
+  $\triangledown$ \textbf{Solución:} Analizando los incisos tenemos que
+  
+  \begin{itemize}
+  \item[$a$)] Sea $\alpha = [q, p := \neg p, s]$ y $\beta = [p, r, q := r \lor q, q \land p, s]$, entonces
+    \begin{eqnarray*}
+      ((q \lor r)\alpha \rightarrow (r \land \neg(r \leftrightarrow p)))\beta
+      &=& ((q\alpha \lor r\alpha) \rightarrow (r \land \neg(r \leftrightarrow p)))\beta\\
+      &=& ((\neg p \lor r) \rightarrow (r \land \neg(r \leftrightarrow p)))\beta\\
+      &=& ((\neg p \lor r)\beta \rightarrow (r \land \neg(r \leftrightarrow p))\beta)\\
+      &=& \neg p\beta \lor r\beta \rightarrow r\beta \land \neg(r \leftrightarrow p)\beta\\
+      &=& \neg (r \lor q) \lor (q \land p) \rightarrow (q \land p) \land \neg(r\beta \leftrightarrow p\beta)\\
+      &=& \neg (r \lor q) \lor (q \land p) \rightarrow (q \land p) \land \neg(q \land p \leftrightarrow r \lor q)
+    \end{eqnarray*}
+  \item[$b$)] Sea $\alpha = [r, u, t := u, t, r]$, entonces
+    \begin{eqnarray*}
+      (u \lor t) \rightarrow (\neg r \leftrightarrow (u \leftrightarrow s))\alpha
+      &=& (u \lor t) \rightarrow (\neg r\alpha \leftrightarrow (u \leftrightarrow s)\alpha)\\
+      &=& (u \lor t) \rightarrow (\neg u \leftrightarrow (u\alpha \leftrightarrow s\alpha))\\
+      &=& (u \lor t) \rightarrow (\neg u \leftrightarrow (t \leftrightarrow s))\\
+      &=& u \lor t \rightarrow (\neg u \leftrightarrow (t \leftrightarrow s))
+    \end{eqnarray*}    
+  \end{itemize}
+  \hfill $\lhd$
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Ejercicio 02
 \item
   \begin{itemize}
   \item[$a$)] \textbf{Define recursivamente} la función $pa$ que dada una fórmula $\varphi$, devuelve el número
@@ -112,12 +137,70 @@ Para cada uno de los siguientes ejercicios, \textbf{justifica ampliamente} tu re
     \]
   \end{itemize}
 \end{enumerate}
+$\triangledown$ \textbf{Solución:}
+\begin{itemize}
+  \item[$a$)] Definimos $pa: PROP \cup \{\land, \lor, \neg, \rightarrow, \leftrightarrow, (, )\} \rightarrow \mathbb{N} \cup \{0\}$.
+  Así, para
+  \[
+  \varphi \in ATOM \cup \{\land, \lor, \neg, \rightarrow, \leftrightarrow, )\}
+  \]
+  se tiene que $pa(\varphi) = 0$. También, $pa\big((\big) = 1$. Para $\alpha, \mu \in PROP$ se tiene que
+  \begin{eqnarray*}
+    pa\big((\alpha)\big) &=& pa\big((\big) + pa(\alpha) + pa\big()\big)\\
+    pa(\neg \alpha) &=& pa(\neg) + pa(\alpha)\\
+    pa(\alpha * \mu) &=& pa(\alpha) + pa(*) + pa(\mu)
+  \end{eqnarray*}
+  donde $* \in \{\land, \lor, \neg, \rightarrow, \leftrightarrow\}$.
+\item[$b$)] Definimos $pc: PROP \cup \{\land, \lor, \neg, \rightarrow, \leftrightarrow, (, )\} \rightarrow \mathbb{N} \cup \{0\}$.
+  Así, para
+  \[
+  \varphi \in ATOM \cup \{\land, \lor, \neg, \rightarrow, \leftrightarrow, (\}
+  \]
+  se tiene que $pc(\varphi) = 0$. También, $pc\big()\big) = 1$. Para $\alpha, \mu \in PROP$ se tiene que
+  \begin{eqnarray*}
+    pc\big((\alpha)\big) &=& pc\big((\big) + pc(\alpha) + pc\big()\big)\\
+    pc(\neg \alpha) &=& pc(\neg) + pc(\alpha)\\
+    pc(\alpha * \mu) &=& pc(\alpha) + pc(*) + pc(\mu)    
+  \end{eqnarray*}
+  donde $* \in \{\land, \lor, \neg, \rightarrow, \leftrightarrow\}$.
+\item[$c$)] Veamos que
+  \begin{eqnarray*}
+    pa\big((((\neg p \land q) \lor \neg r) \rightarrow r)\big)  &=&
+    pa\big((\big) + pa\big(((\neg p \land q) \lor \neg r) \rightarrow r\big) + pa\big()\big)\\
+    &=& 1 + pa\big(((\neg p \land q)\lor \neg r)\big) + pa(\rightarrow) + pa(r)\\
+    &=& 1 + pa\big((\big) + pa\big((\neg p \land q)\big) + pa(\lor) + pa(\neg r) + pa\big()\big)\\
+    &=& 2 + pa\big((\big) + pa\big(\neg p \land q\big) + pa\big()\big) + pa(\neg) + pa(r)\\
+    &=& 3 + pa(\neg p) + pa(\land) + pa(q)\\
+    &=& 3 + pa(\neg) + pa(p)\\
+    &=& 3
+  \end{eqnarray*}
+  además, se tiene que
+  \begin{eqnarray*}
+    pc((((\neg p \land q) \lor \neg r) \rightarrow r)) &=&
+    pc\big((\big) + pc\big(((\neg p \land q) \lor \neg r) \rightarrow r\big) + pc\big()\big)\\
+    &=& pc\big(((\neg p \land q)\lor \neg r)\big) + pc(\rightarrow) + pc(r) + 1\\
+    &=& pc\big((\big) + pc\big((\neg p \land q)\big) + pc(\lor) + pc(\neg r) + pc\big()\big) + 1\\
+    &=& pc\big((\big) + pc\big(\neg p \land q\big) + pc\big()\big) + pc(\neg) + pc(r) + 2\\
+    &=& pc(\neg p) + pc(\land) + pc(q) + 3\\
+    &=& pc(\neg) + pc(p) + 3\\
+    &=& 3
+  \end{eqnarray*}
+  Luego, es claro que
+  \begin{eqnarray*}
+    pa((((\neg p \land q) \lor \neg r) \rightarrow r)) - pc((((\neg p \land q) \lor \neg r) \rightarrow r))
+    &=& 3 - 3\\
+    &=& 0
+  \end{eqnarray*}
+\end{itemize}
+\hfill $\lhd$
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Ejercicio extra
 \textbf{Desafío extra...}
 \renewcommand{\labelitemi}{$-$}
 \begin{itemize}
 \item \textbf{Define recursivamente} una función compress que elimina los elementos consecutivos
   repetidos de una lista.
-
+  
   Ejemplo:
   \begin{center}
     \code{compress([a,a,a,a,i,i,i,u,d,d,d,d,d,a,a,a,a,a,a,a]) = [a,i,u,d,a]}
