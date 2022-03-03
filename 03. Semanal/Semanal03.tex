@@ -205,9 +205,50 @@ $\triangledown$ \textbf{Solución:}
   \begin{center}
     \code{compress([a,a,a,a,i,i,i,u,d,d,d,d,d,a,a,a,a,a,a,a]) = [a,i,u,d,a]}
   \end{center}
+  
+  $\triangledown$ \textbf{Solución:} Para este inciso definimos una función auxiliar que nos
+  indique si un elemento arbitrario esta contenido en una lista, esto es
+  \begin{equation*}
+    \label{eq:aqui-le-mostramos-como-hacerle-la-llave-grande}
+    \code{contains(x:xs, a)}\footnote{\code{contains:[\_] $\rightarrow$ [\_]}.} = \left\{
+    \begin{array}{ll}
+      \code{true}           & \mathrm{si\ } \code{x} = \code{a} \\
+      \code{false}            & \mathrm{si\ } \code{x} = \phi \\
+      \code{contains(s, a)}  & \mathrm{si\ } \code{x} \neq \code{a}
+    \end{array}
+    \right.
+  \end{equation*}
+  
+  Ahora definamos la función \code{compress:[\_] $\rightarrow$ [\_]}, esto es
+  
+  \begin{equation*}
+    \label{eq:aqui-le-mostramos-como-hacerle-la-llave-grande}
+    \code{compress(x:xs)} = \left\{
+    \begin{array}{ll}
+      \code{compress(s)}            & \mathrm{si\ } \code{contains(s, x)} = \code{true} \\
+      \code{x ++ compress(s)}       & \mathrm{si\ } \code{contains(s, x)} = \code{false} 
+    \end{array}
+    \right.
+  \end{equation*}
+  
+  \hfill $\lhd$
 \item \textbf{Demuestra}, usando tu definición, que:
   \begin{center}
     \code{compress([1, 2, 2, 3, 3, 3]) = [1, 2, 3]}
   \end{center}
 \end{itemize}
+\begin{proof} Veamos la ejecución de \code{compress} en las siguientes líneas:
+  \begin{eqnarray*}
+    \code{compress}\big(\code{[1, 2, 2, 3, 3, 3]}\big)
+    &=& \code{1 ++ compress}\big(\code{[2, 2, 3, 3, 3]}\big)\\
+    &=& \code{1 ++ compress}\big(\code{[2, 3, 3, 3]}\big)\\
+    &=& \code{1 ++ 2 ++ compress}\big(\code{[3, 3, 3]}\big)\\
+    &=& \code{1 ++ 2 ++ compress}\big(\code{[3, 3]}\big)\\
+    &=& \code{1 ++ 2 ++ compress}\big(\code{[3]}\big)\\
+    &=& \code{1 ++ 2 ++ 3}\\
+    &=& \code{[1, 2, 3]}
+  \end{eqnarray*}
+  Cabe destacar que por cada llamada a \code{compress(x)} se llama a lo más
+  $\frac{x(x + 1)}{2}$ veces a la función \code{contains} o al menos $1$ vez.
+\end{proof}
 \end{document}
