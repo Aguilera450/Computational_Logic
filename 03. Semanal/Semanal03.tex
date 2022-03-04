@@ -139,51 +139,51 @@ Para cada uno de los siguientes ejercicios, \textbf{justifica ampliamente} tu re
 \end{enumerate}
 $\triangledown$ \textbf{Solución:}
 \begin{itemize}
-  \item[$a$)] Definimos $pa: PROP \cup \{\land, \lor, \neg, \rightarrow, \leftrightarrow, (, )\} \rightarrow \mathbb{N} \cup \{0\}$.
+  \item[$a$)] Definimos $pa: PROP \rightarrow \mathbb{N} \cup \{0\}$.
   Así, para
   \[
-  \varphi \in ATOM \cup \{\land, \lor, \neg, \rightarrow, \leftrightarrow, )\}
+  \varphi \in ATOM
   \]
-  se tiene que $pa(\varphi) = 0$. También, $pa\big((\big) = 1$. Para $\alpha, \mu \in PROP$ se tiene que
+  se tiene que $pa(\varphi) = 0$. Para $\alpha, \mu \in PROP$ se tiene que
   \begin{eqnarray*}
-    pa\big((\alpha)\big) &=& pa\big((\big) + pa(\alpha) + pa\big()\big)\\
-    pa(\neg \alpha) &=& pa(\neg) + pa(\alpha)\\
-    pa(\alpha * \mu) &=& pa(\alpha) + pa(*) + pa(\mu)
+    pa\big((\alpha)\big) &=& 1 + pa(\alpha)\\
+    pa(\neg \alpha) &=& pa(\alpha)\\
+    pa(\alpha * \mu) &=& pa(\alpha) + pa(\mu)
   \end{eqnarray*}
   donde $* \in \{\land, \lor, \rightarrow, \leftrightarrow\}$.
-\item[$b$)] Definimos $pc: PROP \cup \{\land, \lor, \neg, \rightarrow, \leftrightarrow, (, )\} \rightarrow \mathbb{N} \cup \{0\}$.
+\item[$b$)] Definimos $pc: PROP \rightarrow \mathbb{N} \cup \{0\}$.
   Así, para
   \[
-  \varphi \in ATOM \cup \{\land, \lor, \neg, \rightarrow, \leftrightarrow, (\}
+  \varphi \in ATOM
   \]
-  se tiene que $pc(\varphi) = 0$. También, $pc\big()\big) = 1$. Para $\alpha, \mu \in PROP$ se tiene que
+  se tiene que $pc(\varphi) = 0$. Para $\alpha, \mu \in PROP$ se tiene que
   \begin{eqnarray*}
-    pc\big((\alpha)\big) &=& pc\big((\big) + pc(\alpha) + pc\big()\big)\\
-    pc(\neg \alpha) &=& pc(\neg) + pc(\alpha)\\
-    pc(\alpha * \mu) &=& pc(\alpha) + pc(*) + pc(\mu)    
+    pc\big((\alpha)\big) &=& pc(\alpha) + 1\\
+    pc(\neg \alpha) &=& pc(\alpha)\\
+    pc(\alpha * \mu) &=& pc(\alpha) + pc(\mu)    
   \end{eqnarray*}
   donde $* \in \{\land, \lor, \rightarrow, \leftrightarrow\}$.
 \item[$c$)] Veamos que
   \begin{eqnarray*}
     pa\big((((\neg p \land q) \lor \neg r) \rightarrow r)\big)  &=&
-    pa\big((\big) + pa\big(((\neg p \land q) \lor \neg r) \rightarrow r\big) + pa\big()\big)\\
-    &=& 1 + pa\big(((\neg p \land q)\lor \neg r)\big) + pa(\rightarrow) + pa(r)\\
-    &=& 1 + pa\big((\big) + pa\big((\neg p \land q)\big) + pa(\lor) + pa(\neg r) + pa\big()\big)\\
-    &=& 2 + pa\big((\big) + pa\big(\neg p \land q\big) + pa\big()\big) + pa(\neg) + pa(r)\\
-    &=& 3 + pa(\neg p) + pa(\land) + pa(q)\\
-    &=& 3 + pa(\neg) + pa(p)\\
+    1 + pa\big(((\neg p \land q) \lor \neg r) \rightarrow r\big)\\
+    &=& 1 + pa\big(((\neg p \land q)\lor \neg r)\big) + pa(r)\\
+    &=& 2 + pa\big((\neg p \land q)\big) + pa(\neg r)\\
+    &=& 3 + pa\big(\neg p \land q\big) + pa(r)\\
+    &=& 3 + pa(\neg p) + pa(q)\\
+    &=& 3 + pa(p)\\
     &=& 3
   \end{eqnarray*}
   además, se tiene que
   \begin{eqnarray*}
-    pc((((\neg p \land q) \lor \neg r) \rightarrow r)) &=&
-    pc\big((\big) + pc\big(((\neg p \land q) \lor \neg r) \rightarrow r\big) + pc\big()\big)\\
-    &=& pc\big(((\neg p \land q)\lor \neg r)\big) + pc(\rightarrow) + pc(r) + 1\\
-    &=& pc\big((\big) + pc\big((\neg p \land q)\big) + pc(\lor) + pc(\neg r) + pc\big()\big) + 1\\
-    &=& pc\big((\big) + pc\big(\neg p \land q\big) + pc\big()\big) + pc(\neg) + pc(r) + 2\\
-    &=& pc(\neg p) + pc(\land) + pc(q) + 3\\
-    &=& pc(\neg) + pc(p) + 3\\
-    &=& 3
+     pc\big((((\neg p \land q) \lor \neg r) \rightarrow r)\big)  &=&
+     pc\big(((\neg p \land q) \lor \neg r) \rightarrow r\big) + 1\\
+     &=& pc\big(((\neg p \land q)\lor \neg r)\big) + pc(r) + 1\\
+     &=& pc\big((\neg p \land q)\big) + pc(\neg r) + 2\\
+     &=& pc\big(\neg p \land q\big) + pc(r) + 3\\
+     &=& pc(\neg p) + pc(q) + 3\\
+     &=& pc(p) + 3\\
+     &=& 3
   \end{eqnarray*}
   Luego, es claro que
   \begin{eqnarray*}
@@ -240,12 +240,12 @@ $\triangledown$ \textbf{Solución:}
 \begin{proof} Veamos la ejecución de \code{compress} en las siguientes líneas:
   \begin{eqnarray*}
     \code{compress}\big(\code{[1, 2, 2, 3, 3, 3]}\big)
-    &=& \code{1 ++ compress}\big(\code{[2, 2, 3, 3, 3]}\big)\\
-    &=& \code{1 ++ compress}\big(\code{[2, 3, 3, 3]}\big)\\
-    &=& \code{1 ++ 2 ++ compress}\big(\code{[3, 3, 3]}\big)\\
-    &=& \code{1 ++ 2 ++ compress}\big(\code{[3, 3]}\big)\\
-    &=& \code{1 ++ 2 ++ compress}\big(\code{[3]}\big)\\
-    &=& \code{1 ++ 2 ++ 3}\\
+    &=& \code{[1] ++ compress}\big(\code{[2, 2, 3, 3, 3]}\big)\\
+    &=& \code{[1] ++ compress}\big(\code{[2, 3, 3, 3]}\big)\\
+    &=& \code{[1] ++ [2] ++ compress}\big(\code{[3, 3, 3]}\big)\\
+    &=& \code{[1] ++ [2] ++ compress}\big(\code{[3, 3]}\big)\\
+    &=& \code{[1] ++ [2] ++ compress}\big(\code{[3]}\big)\\
+    &=& \code{[1] ++ [2] ++ [3]}\\
     &=& \code{[1, 2, 3]}
   \end{eqnarray*}
   Cabe destacar que por cada llamada a \code{compress(x)} se llama a lo más
