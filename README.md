@@ -3,8 +3,12 @@ En este repositorio se subiran todas las actualizaciones de las tareas
 y ejercicios a entregar en la materia de Lógica Computacional con grupo
 7057 y a cargo del [Dra. Lourdes del Carmen Gonzáles Huesca](https://www.researchgate.net/profile/Lourdes-Del-Carmen-Gonzalez-Huesca)
 que se imparte en la Facultad de Ciencias de la UNAM.
-## Integrantes:
-* Adrián Aguilera Moreno.
+## Autor:
+* Adrián Aguilera Moreno -- @Aguilera450.
+## Masters:
+* Lourdes del Carmen González Huesca -- https://lya.fciencias.unam.mx/lcgh/web/
+* Tania Michelle Rubí Rojas          -- taniarubi@ciencias.unam.mx
+
 ## Temario:
 1. Repaso de LP [Lógica Proposicional].
    * Nociones básicas.
@@ -36,3 +40,4 @@ para trabajar dichas prácticas, estas se pueden encontrar en la siguiente liga:
 * Goranko V., Conradie W., Logic and Discrete Mathematics: A Concise Introduction, Wiley
 * Huth M., Ryan M., Logic in computer science : modelling and reasoning about systems, Cambridge University Press.
 * Hedman S., A First Course in Logic: An Introduction to Model Theory, Proof Theory, Computability, and Complexity Oxford University Press, 2004.
+* Mordechai Ben-Ari. Mathematical logic for computer science. Detalle disponible únicamente Libro electrónico. Springer, 2012  recurso en línea, Base de datos: LIBRUNAM
