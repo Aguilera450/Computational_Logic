@@ -22,7 +22,7 @@
 \newtheorem{algo-thm}{Algoritmo}
 
 % Proof
-\renewcommand*{\proofname}{\textbf{Demostraci\'on:}}
+\renewcommand*{\proofname}{\textbf{Soluci\'on:}}
 % Theorem
 \newtheorem*{theorem}{Teorema}
 
@@ -73,7 +73,6 @@
 %\pagenumbering{gobble} -- Este comando
 %                       -- quita el número de página.
 \footskip = 50pt
-\renewcommand{\headrulewidth}{1pt}
 
 \pagestyle{fancyplain}
 
@@ -94,12 +93,214 @@
 \section*{\LARGE{Semanal 4}}
 Para cada uno de los ejercicios, \textbf{justifica ampliamente} tu respuesta.
 \begin{itemize}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Ejercicio 01.  
 \item[1.] \textbf{Obten} la Forma Normal Negativa de las siguientes fórmulas:
   \begin{itemize}
-  \item $\varphi = ((p \rightarrow r) \land (q \rightarrow r)) \rightarrow ((p \land q) \rightarrow r)$
-  \item 
+  \item[$\cdot$)] $\varphi = ((p \rightarrow r) \land (q \rightarrow r)) \rightarrow ((p \land q) \rightarrow r).$
+  \item[$\cdot$)] $\phi = (p \land (q \rightarrow r)) \rightarrow s.$
   \end{itemize}
-\item[2.] 
-\item[3.] 
+  
+  \begin{proof} Analicemos dos posibles casos:
+    
+    1. Solucionemos $\varphi = ((p \rightarrow r) \land (q \rightarrow r)) \rightarrow ((p \land q) \rightarrow r)$,
+    veamos que
+    \begin{eqnarray*}
+      p \rightarrow r &\equiv& \neg p \lor r.
+      \hspace*{2cm} \text{Por eliminación: } \varphi \rightarrow \psi \equiv \neg \varphi \lor \psi.\\
+      q \rightarrow r &\equiv& \neg q \lor r.
+      \hspace*{2cm} \text{Por eliminación: } \varphi \rightarrow \psi \equiv \neg \varphi \lor \psi.\\
+      (p \land q) \rightarrow r &\equiv& \neg (p \land q) \lor r
+      \hspace*{1.25cm} \text{Por eliminación: } \varphi \rightarrow \psi \equiv \neg \varphi \lor \psi.\\
+      &\equiv& \neg p \lor \neg q \lor r
+      \hspace*{1.27cm} \text{Por De Morgan: } \neg (\varphi \land \psi) \equiv \neg \varphi \lor \neg \psi.\\
+    \end{eqnarray*}
+    de lo anterior se sigue que
+    \[
+    ((p \rightarrow r) \land (q \rightarrow r)) \rightarrow ((p \land q) \rightarrow r)
+    \equiv (\neg p \lor r) \land (\neg q \lor r) \rightarrow \neg p \lor \neg q \lor r
+    \]
+    empleando nuevamente eliminación [$\varphi \rightarrow \psi \equiv \neg \varphi \lor \psi$]
+    tenemos que
+    \begin{eqnarray*}
+    (\neg p \lor r) \land (\neg q \lor r) \rightarrow \neg p \lor \neg q \lor r &\equiv_{1}&
+      \neg ((\neg p \lor r) \land (\neg q \lor r)) \lor \neg p \lor \neg q \lor r\\
+      &\equiv_{2}& \neg (\neg p \lor r) \lor \neg (\neg q \lor r) \lor \neg p \lor \neg q \lor r\\
+      &\equiv_{3}& (\neg\neg p \land \neg r) \lor (\neg\neg q \land \neg r) \lor \neg p \lor \neg q \lor r\\
+      &\equiv_{4}& (p \land \neg r) \lor (q \land \neg r) \lor \neg p \lor \neg q \lor r\\
+      &\equiv_{5}& (\neg r \land (p \lor q)) \lor \neg p \lor \neg q \lor r
+    \end{eqnarray*}
+    $1^{\text{ra}}$ línea por eliminación de la implicación.
+    
+    $2^{\text{da}}$ y $3^{\text{ra}}$ línea por De Morgan.
+    
+    $4^{\text{ta}}$ línea por doble negación.
+    
+    $5^{\text{ta}}$ línea por distributividad.
+    
+    \[
+    \therefore\;\;  \varphi \equiv (\neg r \land (p \lor q)) \lor \neg p \lor \neg q \lor r
+    \]
+    2. Llevemos a $\phi = (p \land (q \rightarrow r)) \rightarrow s$ a FNN, veamos que
+    \begin{eqnarray*}
+      \phi &\equiv& \neg (p \land (q \rightarrow r)) \lor s
+      \hspace*{2cm} \text{Por eliminación: } \varphi \rightarrow \psi \equiv \neg \varphi \lor \psi.\\
+      &\equiv& (\neg p \lor \neg (q \rightarrow r)) \lor s
+      \hspace*{2cm} \text{Distributividad de la negación.}\\
+      &\equiv& (\neg p \lor (q \land \neg r)) \lor s
+      \hspace{2.5cm} \text{Negación de la implicación.}
+    \end{eqnarray*}
+    \[
+    \therefore\;\;  \phi \equiv (\neg p \lor (q \land \neg r)) \lor s
+    \]
+  \end{proof}
+  \newpage
+\item[2.] \textbf{Obten} la Forma Normal Conjuntiva de las siguientes fórmulas:
+  \begin{itemize}
+  \item[$\cdot$)] $\varphi = ((p \rightarrow r) \rightarrow q) \land (r \rightarrow q).$
+  \item[$\cdot$)] $\phi = \neg p \land q \rightarrow p \land (r \rightarrow q).$
+  \end{itemize}
+  \begin{proof} Ahora, analicemos dos posibles casos:
+    
+    1. Pasando a la FNC la fórmula $\varphi = ((p \rightarrow r) \rightarrow q) \land (r \rightarrow q)$,
+    tenemos
+    \begin{eqnarray*}
+      \varphi &\equiv& (\neg (q \rightarrow r)  \lor q) \land (\neg r \lor q)
+      \hspace*{0.9cm} \text{Por eliminación: } \varphi \rightarrow \psi \equiv \neg \varphi \lor \psi.\\
+      &\equiv& ((q \land \neg r)  \lor q) \land (\neg r \lor q)
+      \hspace*{1.8cm} \text{Negación de implicación.}\\
+      &\equiv& (q \lor q) \land (q \lor \neg r) \land (\neg r \lor q)
+      \hspace{2cm} \text{Distributividad.}\\
+      &\equiv& q \land (q \lor \neg r)
+      \hspace{4.7cm} \text{Idenpotencia.}\\
+      &\equiv& q
+      \hspace{6.5cm} \text{Absorción.}\\
+    \end{eqnarray*}
+    \[\therefore\;\;  \varphi \equiv q\]
+    Obs. En clase con la profesora se discutió acerca de FNC y FND, en ambos
+    casos, se concluyó que se aceptan $\bot, \top,$ y algún $x \in VarProp$
+    como casos triviales de estas formas normales. En adelante se omite esta
+    observación.
+      
+    2. Pasando a FNC por medio de equivalencias lógicas a la función
+    $\phi = \neg p \land q \rightarrow p \land (r \rightarrow q)$,
+    tenemos que
+    \begin{eqnarray*}
+      \phi &\equiv& \neg (\neg p \land q) \lor (p \land (\neg r \lor q))
+      \hspace*{2cm} \text{Eliminación de la implicación.}\\
+      &\equiv& (p \lor \neg q) \lor (p \land \neg r) \lor (p \land q)
+      \hspace*{1cm} \text{Leyes de De Morgan y distributividad.}\\
+      &\equiv& p \lor (p \land \neg r) \lor \neg q \lor (p \land q)
+      \hspace*{2.5cm} \text{Conmutatividad de } \lor.\\
+      &\equiv& ((p \lor p) \land (p \lor \neg r)) \lor ((\neg q \lor q) \land (p \lor \neg q))
+      \hspace*{0.7cm} \text{Distributividad.}\\
+      &\equiv& (p \land (p \lor \neg r)) \lor (\top \land (p \lor \neg q))
+      \hspace*{1.5cm} \text{Idempotencia y $3^{\text{ro}}$ excluido.}\\
+      &\equiv&  p \lor (p \lor \neg q)
+      \hspace*{4.2cm} \text{Neutro conjuntivo y absorción.}\\
+      &\equiv& p
+      \hspace*{7.5cm} \text{Absorción.}
+    \end{eqnarray*}
+    \[\therefore\;\;  \phi \equiv p\]
+  \end{proof}
+\newpage
+\item[3.] \textbf{Obten} la Forma Normal Disyuntiva de las siguientes fórmulas:
+  \begin{itemize}
+  \item[$\cdot$)] $\neg(w \rightarrow \neg p) \lor \neg ((\neg s \leftrightarrow w) \lor (p \land s)).$
+  \item[$\cdot$)] $\neg((q \lor \neg (p \rightarrow r)) \rightarrow (p \land (q \rightarrow r))).$
+  \end{itemize}
+  \begin{proof} Para este ejercicio analicemos los incisos por separado, esto es
+    
+    1. Encontrado la FND de la fórmula
+    $\neg(w \rightarrow \neg p) \lor \neg ((\neg s \leftrightarrow w) \lor (p \land s))$,
+    tenemos que si
+    \[
+    \varphi \equiv \neg(w \rightarrow \neg p) \lor \neg ((\neg s \leftrightarrow w) \lor (p \land s))
+    \]
+    luego
+    \begin{eqnarray*}
+      \varphi
+      &\equiv_{1}& (w \land p) \lor \neg ((\neg s \leftrightarrow w) \lor (p \land s))\\
+      &\equiv_{2}& (w \land p) \lor ( \neg (\neg s \leftrightarrow w) \land  \neg (p \land s))\\
+      &\equiv_{3}& (w \land p) \lor ((s \leftrightarrow w) \land  (\neg p \lor \neg s))\\
+      &\equiv_{4}& (w \land p) \lor (((s \land w) \lor (\neg s \land \neg w)) \land  (\neg p \lor \neg s))\\
+      &\equiv_{5}& (w \land p) \lor ((\neg p \lor \neg s) \land (s \land w)) \lor ((\neg p \lor \neg s)
+      \land (\neg s \land \neg w))\\
+      &\equiv_{6}& (w \land p) \lor (\neg p \land (s \land w)) \lor (\neg s \land (s \land w))\\
+      & & \hspace*{1.2cm} \lor (\neg p \land (\neg s \land \neg w)) \lor (\neg s \land (\neg s \land \neg w))\\
+      &\equiv_{7}& (w \land p) \lor (\neg p \land s \land w) \lor ((\neg s \land s) \land w))\\
+      & & \hspace*{1.2cm} \lor (\neg p \land \neg s \land \neg w) \lor (\neg s \land \neg s \land \neg w)\\
+      &\equiv_{8}& (w \land p) \lor (\neg p \land s \land w) \lor (\bot \land w)\\
+      & & \hspace*{1.2cm} \lor (\neg p \land \neg s \land \neg w) \lor ((\neg s \land \neg s) \land \neg w)\\
+      &\equiv_{9}& (w \land p) \lor (\neg p \land s \land w) \lor \bot\\
+      & & \hspace*{1.2cm} \lor (\neg p \land \neg s \land \neg w) \lor (\neg s \land \neg w)\\
+      &\equiv_{10}& (w \land p) \lor (\neg p \land s \land w) \lor (\neg p \land \neg s \land \neg w)
+      \lor (\neg s \land \neg w)\\
+      &\equiv_{11}& (w \land p) \lor (\neg p \land s \land w)\lor (\neg s \land \neg w)
+    \end{eqnarray*}
+    1. Negación de la implicación.
+    
+    2. Leyes de De Morgan.
+    
+    3. Negación de bicondicional y leyes de De Morgan.
+    
+    4. Eliminación de la bicondicional.
+    
+    5. Distribución.
+    
+    6. Distribución.
+    
+    7. Asociación.
+    
+    8. Contradicción y asociación.
+    
+    9. Dominancia.
+    
+    10. Neutro e idempotencia.
+    
+    11. Absorción
+    \[
+    \therefore\;\; \neg(w \rightarrow \neg p) \lor \neg ((\neg s \leftrightarrow w) \lor (p \land s))
+    \equiv (w \land p) \lor (\neg p \land s \land w)\lor (\neg s \land \neg w)
+    \]
+    \newpage
+    2. Encontrando la FND de $\neg((q \lor \neg (p \rightarrow r)) \rightarrow (p \land (q \rightarrow r)))$,
+    tenemos que si
+    \[
+    \phi \equiv \neg((q \lor \neg (p \rightarrow r)) \rightarrow (p \land (q \rightarrow r)))
+    \]
+    entonces:
+    \begin{eqnarray*}
+      \phi &\equiv_{1}& (q \lor \neg (p \rightarrow r)) \land \neg (p \land (q \rightarrow r))\\
+      &\equiv_{2}& (q \lor (p \land \neg r)) \land (\neg p \lor \neg (q \rightarrow r))\\
+      &\equiv_{3}& (q \lor (p \land \neg r)) \land (\neg p \lor (q \land \neg r))\\
+      &\equiv_{4}& (q \land (\neg p \lor (q \land \neg r))) \lor ((p \land \neg r) \land (\neg p \lor (q \land \neg r)))\\
+      &\equiv_{5}& (q \land \neg p) \lor (q \land \neg r) \lor (p \land \neg r \land \neg p)
+      \lor (p \land \neg r \land q \land \neg r)\\
+      &\equiv_{6}& (q \land \neg p) \lor (q \land \neg r) \lor (\bot \land \neg r) \lor (p \land \neg r \land q)\\
+      &\equiv_{7}& (q \land \neg p) \lor (q \land \neg r) \lor \bot \lor (p \land \neg r \land q)\\
+      &\equiv_{8}& (q \land \neg p) \lor (q \land \neg r) \lor (p \land \neg r \land q)\\
+      &\equiv_{9}& (q \land \neg p) \lor (q \land \neg r)
+    \end{eqnarray*}
+    1. Negación de la implicación.
+    
+    2. Negación de la implicación y leyes de De Morgan.
+    
+    3. Negación de la implicación.
+    
+    4. Distributividad.
+    
+    5. Distributividad e idempotencia.
+    
+    6. Conmutatividad, idempotencia y contradicción.
+    
+    7. Dominancia.
+    
+    8. Neutro.
+    
+    9. Absorción.
+    \[
+    \therefore\;\; \phi \equiv (q \land \neg p) \lor (q \land \neg r)
+    \]
+  \end{proof}
 \end{itemize}
 \end{document}
