@@ -6,6 +6,7 @@
 \usepackage{physics}
 \usepackage{cancel}
 \usepackage{amssymb, latexsym, amsmath}
+\usepackage{xcolor}
 
 %Algorithms
 \usepackage[ruled,lined,linesnumbered,commentsnumbered]{algorithm2e}
@@ -97,6 +98,88 @@ Para cada uno de los ejercicios, \textbf{justifica ampliamente} tu respuesta.
 \item[1.] Utilizándo resolución binaria, \textbf{verifica} si los siguientes
   argumentos son verdaderos o falsos:
   \begin{itemize}
-    \item 
+  \item[$\cdot$)] $\{p \rightarrow q, \neg (q \land \neg r), r \rightarrow s\} \models p \rightarrow s$.
+  \item[$\cdot$)] Si estudias Seguridad Informática y eres una persona antisocial, entonces eres un
+    Hacker. Estudias Seguridad Informática pero no te gustan los videojuegos. Así que
+    no eres una persona antisocial.
+  \item[$\cdot$)] $\{p \rightarrow q, r \lor s, \neg s \rightarrow \neg t, \neg q \lor s, \neg s,
+    \neg p \land r \rightarrow u, w \lor r \} \models u \land w$.
   \end{itemize}
+  
+  \begin{proof} Abordemos el ejercicio por partes:
+    \begin{enumerate}
+    \item Veamos que
+      \begin{eqnarray*}
+        &1.& p \rightarrow q \equiv \neg p \lor q\\
+        &2.& \neg (q \land \neg r) \equiv  \neg q \lor r\\
+        &3.& r \rightarrow s \equiv \neg r \lor s\\
+        &4.& \neg (p \rightarrow s) \equiv p \land \neg s
+        \hspace*{1.3cm} \text{Se niega el consecuente.}\\
+        &5.& p \hspace*{4cm} \text{por } 4.\\
+        &6.& \neg s \hspace*{3.8cm} \text{por } 4.\\
+        &7.& q \hspace*{4cm} \text{Res}(1,5).\\
+        &8.& r \hspace*{4cm} \text{Res}(2,7).\\
+        &9.& s \hspace*{4cm} \text{Res}(3,8).\\
+        &10.& \square \hspace*{3.9cm} \text{Res}(6,9).
+      \end{eqnarray*}
+      Como concluimos que se llega a una contradicción, entonces
+      podemos asegurar que el conjunto no genera como conclusión
+      a $\neg (p \rightarrow s)$, esto implica que si genere a
+      $p \rightarrow s$ como conclusión.
+      \[
+      \therefore\;\; \text{El argumento es correcto.}
+      \]
+    \item Definamos
+      \begin{eqnarray*}
+        &p\; :& \text{estudias Seguridad Informática}.\\
+        &q\; :& \text{eres una persona antisocial}.\\
+        &r\; :& \text{eres hacker}.\\
+        &s\; :& \text{te gustan los videojuegos}.
+      \end{eqnarray*}
+      ahora, nuestro conjunto de proposiciones lógicas se resume en
+      \begin{eqnarray*}
+        \{p \land q \rightarrow r, p \land \neg s\} \models \neg q
+      \end{eqnarray*}
+      realizando resolución binaria tenemos que
+      \begin{eqnarray*}
+        &1.& p \land q \rightarrow r \equiv \neg (p \land q) \lor r \equiv \neg p \lor \neg q \lor r\\
+        &2.& p \land \neg s\\
+        &3.& \neg \neg q \equiv q \hspace*{5cm} \text{Se niega el consecuente.}\\
+        &4.& p \hspace*{6.1cm} \text{por } 2.\\
+        &5.& \neg s \hspace*{5.9cm} \text{por } 2.\\
+        &6.& \neg q \lor r \hspace*{5.3cm} \text{Res}(1,4).\\
+        &7.& r \hspace*{6.1cm} \text{Res}(3,6).
+      \end{eqnarray*}
+    \item Veamos que
+      \begin{eqnarray*}
+        &1.& p \rightarrow q \equiv \neg p \lor q\\
+        &2.& r \lor s\\
+        &3.& \neg s \rightarrow \neg t \equiv s \lor \neg t\\
+        &4.& \neg q \lor s\\
+        &5.& \neg s\\
+        &6.& \neg p \land r \rightarrow  u \equiv \neg (\neg p \land r) \lor u \equiv p \lor \neg r \lor u\\
+        &7.& w \lor t\\
+        &8.& \neg (u \land w) \equiv \neg u \lor \neg w \hspace*{5cm} \text{Se niega el consecuente.}\\
+        &9.& r \hspace*{8cm} \text{Res}(2,5).\\
+        &10.& \neg t \hspace*{7.85cm} \text{Res}(3,5).\\
+        &11.& \neg q \hspace*{7.8cm} \text{Res}(4,5).\\
+        &12.& \neg p \hspace*{7.8cm} \text{Res}(1,11).\\
+        &13.& p \lor u \hspace*{7.45cm} \text{Res}(6,9).\\
+        &14.& \neg r \lor u \hspace*{7.3cm} \text{Res}(6,12).\\
+        &15.& w \hspace*{8cm} \text{Res}(7,10).\\
+        &14.& \neg u \hspace*{7.8cm} \text{Res}(8,15).\\
+        &15.& u \hspace*{8.05cm}\text{Res}(9,14).\\
+        &16.& \square \hspace*{8cm} \text{Res}(14,15).
+      \end{eqnarray*}
+      como concluimos que
+      \[
+      \{p \rightarrow q, r \lor s, \neg s \rightarrow \neg t, \neg q \lor s, \neg s,
+      \neg p \land r \rightarrow u, w \lor r \} \cup \{\neg (u \land w)\}
+      \]
+      es una contradicción, entonces se sigue que
+      \[
+      \therefore\;\; \text{El argumento es correcto.}
+      \]
+    \end{enumerate}
+  \end{proof}
 \end{document}
