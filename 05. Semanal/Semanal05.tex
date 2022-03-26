@@ -140,7 +140,7 @@ Para cada uno de los ejercicios, \textbf{justifica ampliamente} tu respuesta.
       \begin{eqnarray*}
         \{p \land q \rightarrow r, p \land \neg s\} \models \neg q
       \end{eqnarray*}
-      realizando resolución binaria tenemos que
+      Llamemos $\Gamma = \{p \land q \rightarrow r, p \land \neg s\}$, realizando resolución binaria tenemos que
       \begin{eqnarray*}
         &1.& p \land q \rightarrow r \equiv \neg (p \land q) \lor r \equiv \neg p \lor \neg q \lor r\\
         &2.& p \land \neg s\\
@@ -150,6 +150,13 @@ Para cada uno de los ejercicios, \textbf{justifica ampliamente} tu respuesta.
         &6.& \neg q \lor r \hspace*{5.3cm} \text{Res}(1,4).\\
         &7.& r \hspace*{6.1cm} \text{Res}(3,6).
       \end{eqnarray*}
+      Observemos que llegamos a una proposición y no a una contradicción (o al vacio), además
+      ya no podemos seguir haciendo resolución binaria, esto es consecuencia directa de que $\Gamma \cup \{q\}$
+      es satisfacible (pueden coexistir). Lo anterior indica que $\neg q$ no es un modelo (no debe ser conclusión)
+      para $\Gamma$, así concluimos que
+      \[
+      \therefore\; \text{ El argumento es falso.}
+      \]
     \item Veamos que
       \begin{eqnarray*}
         &1.& p \rightarrow q \equiv \neg p \lor q\\
