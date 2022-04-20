@@ -1,0 +1,188 @@
+\documentclass{article}
+
+% Symbols
+\usepackage[T1]{fontenc}
+\usepackage{upgreek}
+\usepackage{physics}
+\usepackage{cancel}
+\usepackage{amsfonts, amsthm}
+\usepackage{amssymb, latexsym, amsmath}
+
+
+% Proof
+\renewcommand*{\proofname}{\textbf{Soluci\'on:}}
+
+% Theorem
+\newtheorem*{theorem}{Teorema}
+
+%Algorithms
+\usepackage[ruled,lined,linesnumbered,commentsnumbered]{algorithm2e}
+
+%% Identación
+\setlength{\parindent}{0cm}
+
+% Código
+\newcommand{\code}[1]{\textcolor{white!25!black}{\texttt{#1}}}
+\usepackage{listings}
+
+%AMS
+\usepackage{amsthm}
+\newtheorem{algo-thm}{Algoritmo}
+
+% Graphics
+\usepackage{graphicx}
+\usepackage{pgf}
+
+% Margins
+\addtolength{\voffset}{-1.5cm}
+\addtolength{\hoffset}{-1.5cm}
+\addtolength{\textwidth}{3cm}
+\addtolength{\textheight}{3cm}
+
+%Header-Footer
+\usepackage{fancyhdr}
+\renewcommand{\headrulewidth}{1pt}
+
+\newcommand{\set}[1]{
+  \left\{ #1 \right\}
+}
+
+\footskip = 50pt
+\renewcommand{\headrulewidth}{1pt}
+
+\pagestyle{fancyplain}
+
+\begin{document}
+\title{UNIVERSIDAD NACIONAL AUT\'ONOMA DE M\'EXICO\\ Facultad de Ciencias}
+\author{Autor: Adri\'an Aguilera Moreno}
+\date{}
+\maketitle
+\begin{center}
+  \includegraphics[scale=0.20]{../Imagen/Portada.jpg}\\[0.4cm]
+  \Large
+  \bf{Lógica Computacional}
+  \normalsize
+\end{center}
+\newpage
+\fancyhead[r]{ Lógica Computacional 2022-2}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{\LARGE{Semanal 5}}
+Para cada uno de los ejercicios, \textbf{justifica ampliamente} tu respuesta.
+
+\newcommand{\localtextbulletone}{\textcolor{black}{\raisebox{.45ex}{\rule{.6ex}{.6ex}}}}
+\renewcommand{\labelitemi}{\localtextbulletone}
+\begin{itemize}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Ejercicio 01.
+\item \textbf{Da} la especificación formal del siguiente argumento,
+  definiendo previamente una signtura adecuada.
+  \begin{center}
+    \guillemotleft Los alumnos de la Facultad de Ciencias y los
+    programadores sólo alcanzan su máximo nivel cuando la luna
+    es rosa.\guillemotright
+  \end{center}
+  
+  \begin{proof}
+    Definamos la signatura para este enunciado, esto es
+    \[
+    Personas
+    \cup \{luna\}
+    \cup \{colorear^{2}\}
+    \cup \{Pers^{1}, AlumnoFC^{1}, Prog^{1}, EsColor^{2}, MaxNivel^{1}\}
+    \]
+    que significan:
+    \begin{itemize}
+    \item $colorear(x, y) = x$ coloreado de $y$ [se devuelve $x$, solo cambia su estado],
+      esto es una función.
+    \item $Pers(x) = x$ es una persona.
+    \item $AlumnoFC(x) = x$ es alumno de la Facultad de Ciencias.
+    \item $Prog(x) = x$ es programador.
+    \item $EsColor(x, y) = x$ es de color $y$.
+    \item $MaxNivel(x) = x$ ha alcanzado su máximo nivel.
+    \end{itemize}
+    Dada la signatura anterior, tenemos que el enunciado se traduce como
+    \begin{eqnarray*}
+      \forall_{x} \left(Pers(x) \land AlumnoFC(x) \land Prog(x)
+      \rightarrow \left(EsColor(colorear(luna, rosa), rosa) \rightarrow MaxNivel(x)\right)\right)
+    \end{eqnarray*}
+  \end{proof}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Ejercicio 02.
+\item Dadas las siguientes expresiones:
+  \begin{enumerate}
+  \item $\forall_{x}\forall_{u}\left(M(a, x) \rightarrow M(a, u)\right)$
+  \item $(\forall_{x, u}\left(M(a, x)\right) \rightarrow M(a, u)$
+  \item $\forall_{x}(M(a, x) \rightarrow M(a, u))$
+  \end{enumerate}
+  \textbf{Realiza} lo siguiente:
+  \begin{itemize}
+  \item[$a$)] Indica si las relaciones
+    \begin{center}
+      \begin{tabular}{ c  c  c}
+        $(1) \sim_{\alpha} (2)$ \hspace*{1cm} & $(2) \sim_{\alpha} (3)$ \hspace*{1cm} & $(1) \sim_{\alpha} (3)$
+      \end{tabular} 
+    \end{center}
+    de $\alpha$-equivalencia se cumplen.
+  \item[$b$)] Aplica la sustitución
+    \[
+    \delta = [x, u := \ell(a, n, d, r, o), c(i, z, o)]
+    \]
+    a cada una de las expresiones.
+  \end{itemize}
+\end{itemize}
+\begin{proof}
+  Primero, encontremos las $\sim_{\alpha}$ equivalencias, esto es
+  \begin{eqnarray*}
+    1.\; \forall_{x}\forall_{u}\left(M(a,x) \rightarrow M(a,u)\right)
+    &\sim_{\alpha}& \forall_{w}\forall_{u}(M(a, w) \rightarrow M(a, u))\\
+    &\sim_{\alpha}& \forall_{w}\forall_{v}(M(a, w) \rightarrow M(a, v))
+  \end{eqnarray*}
+  
+  \begin{eqnarray*}
+    2.\; (\forall_{xu}M(a,x)) \rightarrow M(a,u)
+    &\sim_{\alpha}& (\forall_{wu}M(a, w)) \rightarrow M(a, u)\\
+    &\sim_{\alpha}& (\forall_{wv}M(a, w)) \rightarrow M(a, u)\\
+    &\sim_{\alpha}& (\forall_{w}M(a, w)) \rightarrow M(a, u)
+  \end{eqnarray*}
+  
+  \begin{eqnarray*}
+    3.\; \forall_{x}\left(M(a,x) \rightarrow M(a,u)\right)
+    \sim_{\alpha} \forall_{w}\left(M(a,w) \rightarrow M(a,u)\right)
+  \end{eqnarray*}
+  Ahora, veamos que $(1) \not\sim_{\alpha} (2)$, pues difieren en
+  variables no ligadas, como lo es $u$ en $(2)$, pues en $(1)$ la
+  única variable no ligada es $a$.
+  
+  En cambio, $(2) \sim_{\alpha} (3)$, pues por definición de $\sim_{\alpha}$
+  se tiene que a lo más difieran en sus variables ligadas, el cual es el caso,
+  ya que, $\{a, u\}$ son variables no ligadas.
+  
+  Como $(1) \not\sim_{\alpha} (2)$ y $(2) \sim_{\alpha} (3)$, entonces por
+  transitividad tenemos que $1 \not \sim_{\alpha} (3)$.
+  
+  Ahora, realicemos las sustituciones con $\delta$, estas las aplicaremos a
+  las $\sim_{\alpha}$ a las que hemos llegado, esto es
+  
+  \begin{eqnarray*}
+    1.\; \underbrace{\forall_{w}\forall_{v}(M(a, w) \rightarrow M(a, v))}_{\delta}
+    &=& \forall_{w}\underbrace{\forall_{v}(M(a, w) \rightarrow M(a, v))}_{\delta}\\
+    &=& \forall_{w}\forall_{v}(\underbrace{M(a, w) \rightarrow M(a, v)}_{\delta})\\
+    &=& \forall_{w}\forall_{v}(\underbrace{M(a, w)}_{\delta} \rightarrow \underbrace{M(a, v)}_{\delta})\\
+    &=& \forall_{w}\forall_{v}(M(\underbrace{a}_{\delta}, \underbrace{w}_{\delta}) \rightarrow M(\underbrace{a}_{\delta}, \underbrace{v}_{\delta}))\\
+    &=& \forall_{w}\forall_{v}(M(a, w) \rightarrow M(a, v))
+  \end{eqnarray*}
+  
+  \begin{eqnarray*}
+    2.\; \underbrace{(\forall_{w}M(a, w)) \rightarrow M(a, u)}_{\delta}
+    &=& (\underbrace{\forall_{w}M(a, w)}_{\delta}) \rightarrow \underbrace{M(a, u)}_{\delta}\\
+    &=& (\forall_{w}M(\underbrace{a}_{\delta}, \underbrace{w}_{\delta})) \rightarrow M(\underbrace{a}_{\delta}, \underbrace{u}_{\delta})\\
+    &=& (\forall_{w}M(a, w)) \rightarrow M(a, c(i, z, o))
+  \end{eqnarray*}
+  
+  \begin{eqnarray*}
+    3.\; \underbrace{\forall_{w}\left(M(a,w) \rightarrow M(a,u)\right)}_{\delta}
+    &=& \forall_{w}\underbrace{\left(M(a,w) \rightarrow M(a,u)\right)}_{\delta}\\
+    &=& \forall_{w}(\underbrace{M(a,w)}_{\delta} \rightarrow \underbrace{M(a,u)}_{\delta})\\
+    &=& \forall_{w}(M(\underbrace{a}_{\delta},\underbrace{w}_{\delta}) \rightarrow M(\underbrace{a}_{\delta},\underbrace{u}_{\delta}))\\
+    &=& \forall_{w}\left(M(a,w) \rightarrow M(a,c(i,z,o))\right)
+  \end{eqnarray*}
+\end{proof}
+\end{document}
