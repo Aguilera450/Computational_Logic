@@ -1,0 +1,148 @@
+\documentclass{article}
+
+% Symbols
+\usepackage[T1]{fontenc}
+\usepackage{upgreek}
+\usepackage{physics}
+\usepackage{cancel}
+\usepackage{amsfonts, amsthm}
+\usepackage{amssymb, latexsym, amsmath}
+
+
+% Proof
+\renewcommand*{\proofname}{\textbf{Soluci\'on:}}
+
+% Theorem
+\newtheorem*{theorem}{Teorema}
+
+%Algorithms
+\usepackage[ruled,lined,linesnumbered,commentsnumbered]{algorithm2e}
+
+%% Identación
+\setlength{\parindent}{0cm}
+
+% Código
+\newcommand{\code}[1]{\textcolor{white!25!black}{\texttt{#1}}}
+\usepackage{listings}
+
+%AMS
+\usepackage{amsthm}
+\newtheorem{algo-thm}{Algoritmo}
+
+% Graphics
+\usepackage{graphicx}
+\usepackage{pgf}
+
+% Margins
+\addtolength{\voffset}{-1.5cm}
+\addtolength{\hoffset}{-1.5cm}
+\addtolength{\textwidth}{3cm}
+\addtolength{\textheight}{3cm}
+
+%Header-Footer
+\usepackage{fancyhdr}
+\renewcommand{\headrulewidth}{1pt}
+
+\newcommand{\set}[1]{
+  \left\{ #1 \right\}
+}
+
+\footskip = 50pt
+\renewcommand{\headrulewidth}{1pt}
+
+\pagestyle{fancyplain}
+
+\begin{document}
+\title{UNIVERSIDAD NACIONAL AUT\'ONOMA DE M\'EXICO\\ Facultad de Ciencias}
+\author{Autor: Adri\'an Aguilera Moreno}
+\date{}
+\maketitle
+\begin{center}
+  \includegraphics[scale=0.20]{../Imagen/Portada.jpg}\\[0.4cm]
+  \Large
+  \bf{Lógica Computacional}
+  \normalsize
+\end{center}
+\newpage
+\fancyhead[r]{ Lógica Computacional 2022-2}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{\LARGE{Semanal 7}}
+Para cada uno de los ejercicios, \textbf{justifica ampliamente} tu respuesta.
+
+\begin{enumerate}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Ejercicio 01.
+\item Para cada una de las siguientes fórmulas, \textbf{encuentra} una
+  fórmula que sea $ \alpha$-equivalente tal que cada cuantificador ligue a una
+  variable distinta.
+  \newcommand{\localtextbulletone}{\textcolor{black}{\raisebox{.45ex}{\rule{.6ex}{.6ex}}}}
+  \renewcommand{\labelitemi}{\localtextbulletone}
+  \begin{itemize}
+  \item $\varphi = \forall_{v}. (\exists_{y}.(S(u,y,z))) \lor \exists_{z}.(P(f(v), g(y), z))$
+  \item $\phi = \exists_{x}.(\forall_{y}.(R(x,y) \rightarrow Q(z)) \land Q(x))$
+  \item $\gamma = P(x,y) \land \exists_{y}.(Q(x,y) \leftrightarrow P(y,y))$
+  \item $\psi = \forall_{x}.(P(y,z) \rightarrow \exists_{y}.(R(x,y,w) \lor S(a,y)))$
+    \begin{proof}
+      \begin{eqnarray*}
+        \varphi &\sim_{\alpha}& \forall_{v}. (\exists_{r}.(S(u,r,z))) \lor \exists_{z}.(P(f(v), g(y), z))\\
+        &\sim_{\alpha}& \forall_{v}. (\exists_{r}.(S(u,r,z))) \lor \exists_{p}.(P(f(v), g(y), p)).\\
+        \phi &\sim_{\alpha}& \exists_{v}. (\forall_{y}. (R(v,y)) \rightarrow Q(z)) \land Q(v)\\
+        &\sim_{\alpha}& \exists_{v}. (\forall_{u}. (R(v,u)) \rightarrow Q(z)) \land Q(v).\\
+        \gamma &\sim_{\alpha}& P(x,y) \land \exists_{m}.(Q(x, m) \leftrightarrow P(m,m)).\\
+        \psi &\sim_{\alpha}& \forall_{v}.(P(y,z) \rightarrow \exists_{y}.(R(v, y, w) \lor S(a,y)))\\
+        &\sim_{\alpha}& \forall_{v}.(P(y,z) \rightarrow \exists_{u}.(R(v, u, w) \lor S(a,u))).
+      \end{eqnarray*}
+    \end{proof}
+  \end{itemize}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Ejercicio 02.
+\item \textbf{Realiza} las siguientes sustituciones:
+  \begin{itemize}
+  \item $\varphi [w := f(u), u := g(y, z), y := b]$
+  \item $\phi[x := g(h(a,y)), y := g(b), z := f(y)]$
+  \item $\gamma[x,y,z := y, f(g(a)), f(b)]$
+  \item $\psi[x,y,w := y,f(c),x]$
+  \end{itemize}
+  \begin{proof}
+    Sustitución en $\varphi$. Sean $\beta = [w := f(u)]$, $\eta = [u := g(y,z)]$ y
+    $\theta = [y := b]$. Entonces,
+    \begin{eqnarray*}
+      [\forall_{v}. (\exists_{r}.(S(u,r,z))) \lor \exists_{p}.(P(f(v), g(y), p))] \beta \eta \theta
+      &=& [\forall_{v}. (\exists_{r}.(S(u,r,z))) \lor \exists_{p}.(P(f(v), g(y), p))]\eta \theta\\
+      &=& [\forall_{v}. (\exists_{r}.(S(g(y,z),r,z))) \lor \exists_{p}.(P(f(v), g(y), p))] \theta\\
+      &=& \forall_{v}. (\exists_{r}.(S(g(b,z),r,z))) \lor \exists_{p}.(P(f(v), g(b), p)).
+    \end{eqnarray*}
+    Notemos que se omite la aplicación del algoritmo de sustitución, pues en la tarea semanal $6$
+    se ejemplifica paso a paso este proceso.
+    
+    Sustitución en $\phi$. Sean $\beta = [x := g(h(a,y))]$, $\eta = [y := g(b)]$ y
+    $\theta = [z := f(y)]$. Entonces,
+    \begin{eqnarray*}
+      [\exists_{v}. (\forall_{u}. (R(v,u)) \rightarrow Q(z)) \land Q(v)]\beta \eta \theta &=&
+      [\exists_{v}. (\forall_{u}. (R(v,u)) \rightarrow Q(z)) \land Q(v)]\eta \theta \\
+      &=& [\exists_{v}. (\forall_{u}. (R(v,u)) \rightarrow Q(z)) \land Q(v)] \theta\\
+      &=& \exists_{v}. (\forall_{u}. (R(v,u)) \rightarrow Q(f(y))) \land Q(v).
+    \end{eqnarray*}
+    Mismo caso que el anterior.
+    
+    Sustitución en $\gamma$. Sea $\eta = [x,y,z := y, f(g(a)), f(b)]$. Entonces,
+    \begin{eqnarray*}
+      [P(x,y) \land \exists_{m}.(Q(x, m) \leftrightarrow P(m,m))] \eta &=&
+      \underbrace{P(x,y)}_{\eta} \land \underbrace{\exists_{m}.(Q(x, m) \leftrightarrow P(m,m))}_{\eta}\\
+      &=& P(\underbrace{x}_{\eta},\underbrace{y}_{\eta}) \land \exists_{m}.(\underbrace{Q(x, m)}_{\eta} \leftrightarrow \underbrace{P(m,m)}_{\eta})\\
+      &=&
+      P(y,f(g(a))) \land \exists_{m}.(Q(\underbrace{x}_{\eta}, \underbrace{m}_{\eta}) \leftrightarrow P(\underbrace{m}_{\eta},\underbrace{m}_{\eta}))\\
+      &=&  P(y,f(g(a))) \land \exists_{m}.(Q(y, m) \leftrightarrow P(m,m)).
+    \end{eqnarray*}
+    
+    Sustitución en $\psi$. Sea $\eta = [x,y,w := y, f(c), x]$. Entonces,
+    \begin{eqnarray*}
+      [\forall_{v}.(P(y,z) \rightarrow \exists_{u}.(R(v, u, w) \lor S(a,u)))] \eta &=&
+       \forall_{v}.(\underbrace{P(y,z) \rightarrow \exists_{u}.(R(v, u, w) \lor S(a,u))}_{\eta})\\
+       &=& \forall_{v}.(\underbrace{P(y,z)}_{\eta} \rightarrow \underbrace{\exists_{u}.(R(v, u, w) \lor S(a,u))}_{\eta})\\
+       &=& \forall_{v}.(P(\underbrace{y}_{\eta}, \underbrace{z}_{\eta}) \rightarrow \exists_{u}.(\underbrace{R(v, u, w)}_{\eta} \lor \underbrace{S(a,u)}_{\eta}))\\
+       &=& \forall_{v}.(P(f(c), z) \rightarrow \exists_{u}.(R(\underbrace{v}_{\eta}, \underbrace{u}_{\eta}, \underbrace{w}_{\eta}) \lor S(\underbrace{a}_{\eta},\underbrace{u}_{\eta})))\\
+       &=& \forall_{v}.(P(f(c), z) \rightarrow \exists_{u}.(R(v, u, x) \lor S(a,u))).
+    \end{eqnarray*}
+  \end{proof}
+\end{enumerate}
+\end{document}
+
