@@ -67,5 +67,116 @@
 \fancyhead[r]{ Lógica Computacional 2022-2}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{\LARGE{Semanal 8}}
+Para cada uno de los siguientes ejercicios, \textbf{justifica ampliamente} tu respuesta.
+\\
 
+1. \textbf{Obtén} la Forma Normal Negativa y la Forma Normal Prenex de las siguientes fórmulas:
+\newcommand{\localtextbulletone}{\textcolor{black}{\raisebox{.45ex}{\rule{.6ex}{.6ex}}}}
+\renewcommand{\labelitemi}{\localtextbulletone}
+\begin{itemize}
+\item $\forall_{x}\forall_{y}\left(\exists_{z}(R(x,z) \rightarrow R(z,y)) \rightarrow P(y,x)\right)
+  \rightarrow \exists_{x}\left(\forall_{y}P(x,y) \rightarrow \exists_{y}P(y,x)\right)
+  \rightarrow \forall_{x}P(x,x)$:
+  \begin{proof}
+    Llamemos $\varphi$ a la ecuación anterior. Así, al rectificar nuestra ecuación tenemos que
+    \begin{eqnarray*}
+      rec(\varphi) &=& \forall_{x'}\forall_{y'}\left(\exists_{z'}(R(x',z') \rightarrow R(z',y')) \rightarrow P(y',x')\right)
+      \rightarrow \exists_{m}\left(\forall_{n}P(m,n)  \rightarrow \exists_{y}P(y,m)\right)\\
+      & &\rightarrow \forall_{x}P(x,x)\\
+      &=& \varphi'
+    \end{eqnarray*}
+    encontrando la Forma Normal Negativa tenemos que
+    \begin{eqnarray*}
+      fnn(\varphi') &=& \forall_{x'}\forall_{y'}\left(\exists_{z'}(\neg R(x',z') \lor  R(z',y')) \rightarrow  P(y',x')\right)
+      \rightarrow \exists_{m}\left(\neg \forall_{n}P(m,n) \lor \exists_{y}P(y,m)\right)\\
+      & & \rightarrow \forall_{x}P(x,x)\\
+      &=& \forall_{x'}\forall_{y'}\left(\neg\exists_{z'}(\neg R(x',z') \lor  R(z',y')) \lor  P(y',x')\right)
+      \rightarrow \exists_{m}\left(\neg \forall_{n}P(m,n) \lor \exists_{y}P(y,m)\right)\\
+      & & \rightarrow \forall_{x}P(x,x)\\
+      &=& \neg \forall_{x'}\forall_{y'}\left(\neg\exists_{z'}(\neg R(x',z') \lor  R(z',y')) \lor  P(y',x')\right)
+      \lor \exists_{m}\left(\neg \forall_{n}P(m,n) \lor \exists_{y}P(y,m)\right)\\
+      & & \rightarrow \forall_{x}P(x,x)\\
+      &=& \neg (\neg \forall_{x'}\forall_{y'}\left(\neg\exists_{z'}(\neg R(x',z') \lor  R(z',y')) \lor  P(y',x')\right)
+      \lor \exists_{m}\left(\neg \forall_{n}P(m,n) \lor \exists_{y}P(y,m)\right))\\
+      & & \lor\; \forall_{x}P(x,x)\\
+      &=& \forall_{x'}\forall_{y'}\left(\neg\exists_{z'}(\neg R(x',z') \lor  R(z',y')) \lor  P(y',x')\right)
+      \land \neg \exists_{m}\left(\neg \forall_{n}P(m,n) \lor \exists_{y}P(y,m)\right)\\
+      & & \lor\; \forall_{x}P(x,x)\\
+      &=& \forall_{x'}\forall_{y'}\left(\forall_{z'}(R(x',z') \land \neg R(z',y')) \lor  P(y',x')\right)
+      \land \forall_{m}\left(\forall_{n} P(m,n) \land \forall_{y} \neg P(y,m)\right)\\
+      & & \lor\; \forall_{x}P(x,x)\\
+      &=& \varphi''
+    \end{eqnarray*}
+    por último, encontremos la Forma Normal de Prenex. Esto es
+    \begin{eqnarray*}
+      prenex(\varphi'') &=& \forall_{x'}\forall_{y'}\left(\forall_{z'}(R(x',z') \land \neg R(z',y')) \lor  P(y',x')\right)
+      \land \forall_{m}\left(\forall_{n} P(m,n) \land \forall_{y} \neg P(y,m)\right)\\
+      & & \lor\; \forall_{x}P(x,x)\\
+      &=& \forall_{x}(\forall_{x'}\forall_{y'}\left(\forall_{z'}(R(x',z') \land \neg R(z',y')) \lor  P(y',x')\right)
+      \land \forall_{m}\left(\forall_{n} P(m,n) \land \forall_{y} \neg P(y,m)\right)\\
+      & & \lor\; P(x,x))\\
+      &=& \forall_{x}(\forall_{x'}\forall_{y'}\left(\forall_{z'}(R(x',z') \land \neg R(z',y')) \lor  P(y',x')\right)
+      \land \forall_{y}\forall_{n}\forall_{m}\left(P(m,n) \land \neg P(y,m)\right)\\
+      & & \lor\; P(x,x))\\
+      &=& \forall_{x}(\forall_{y}\forall_{n}\forall_{m}\forall_{x'}\forall_{y'}\left(\forall_{z'}(R(x',z') \land \neg R(z',y')) \lor  P(y',x')\right)
+      \land \left(P(m,n) \land \neg P(y,m)\right)\\
+      & & \lor\; P(x,x))\\
+      &=& \forall_{x}(\forall_{z'}\forall_{y}\forall_{n}\forall_{m}\forall_{x'}\forall_{y'}\left((R(x',z') \land \neg R(z',y')) \lor  P(y',x')\right)
+      \land \left(P(m,n) \land \neg P(y,m)\right)\\
+      & & \lor\; P(x,x))\\
+      &=& \forall_{x}\forall_{z'}\forall_{y}\forall_{n}\forall_{m}\forall_{x'}\forall_{y'}\left(((R(x',z') \land \neg R(z',y')) \lor  P(y',x')\right)
+      \land P(m,n) \land \neg P(y,m))\\
+      & & \lor\; P(x,x))
+    \end{eqnarray*}
+  \end{proof}
+\item $\forall_{x}\forall_{y}\left(P(x,y) \rightarrow \exists_{z}(R(x,y) \land R(z,y))\right)
+  \rightarrow \exists_{x}\left(\forall_{y}P(x,y) \land \forall_{y}P(y,x)\right) \lor \exists_{x}P(x,x)$:
+  \begin{proof}
+    Llamemos $\phi$ a la ecuación anterior. Así, al rectificar nuestra ecuación tenemos que
+    \begin{eqnarray*}
+      rec(\phi) &=& \forall_{x'}\forall_{y'}\left(P(x',y') \rightarrow \exists_{z}(R(x',y') \land R(z,y'))\right)
+      \rightarrow \exists_{m}\left(\forall_{n}P(m,n) \land \forall_{s}P(s,m)\right) \lor \exists_{x}P(x,x)\\
+      &=& \phi'
+    \end{eqnarray*}
+    encontrando la Forma Normal Negativa tenemos que
+    \begin{eqnarray*}
+      fnn(\phi') &=& \forall_{x'}\forall_{y'}\left(\neg P(x',y') \lor \exists_{z}(R(x',y') \land R(z,y'))\right)
+      \rightarrow \exists_{m}\left(\forall_{n}P(m,n) \land \forall_{s}P(s,m)\right) \lor \exists_{x}P(x,x)\\
+      &=& \neg \forall_{x'}\forall_{y'}\left(\neg P(x',y') \lor \exists_{z}(R(x',y') \land R(z,y'))\right)
+      \lor \exists_{m}\left(\forall_{n}P(m,n) \land \forall_{s}P(s,m)\right) \lor \exists_{x}P(x,x)\\
+      &=& \exists_{x'}\exists_{y'}\left(P(x',y') \land \forall_{z}(\neg R(x',y') \lor \neg R(z,y'))\right)
+      \lor \exists_{m}\left(\forall_{n}P(m,n) \land \forall_{s}P(s,m)\right) \lor \exists_{x}P(x,x)\\
+      &=& \phi''
+    \end{eqnarray*}
+    por último, encontremos la Forma Normal de Prennex, esto es
+    \begin{eqnarray*}
+      prennex(\phi'') &=& \exists_{x'}\exists_{y'}\forall_{z}\left(P(x',y') \land (\neg R(x',y') \lor \neg R(z,y'))\right)
+      \lor \exists_{m}\forall_{n}\forall_{s}\left(P(m,n) \land P(s,m)\right) \lor \exists_{x}P(x,x)\\
+      &=& \exists_{x'}\exists_{y'}\forall_{z}\exists_{x}\exists_{m}\forall_{n}\forall_{s}\left(P(x',y')
+      \land (\neg R(x',y') \lor \neg R(z,y')) \lor \left(P(m,n) \land P(s,m)\right) \lor P(x,x)\right)
+    \end{eqnarray*}
+  \end{proof}
+\item $\forall_{x}\exists_{y}\left(B(x, a) \land M (y, x)\right) \rightarrow \exists_{z}\left(B(x, w) \land M (z, x)\right)$:
+  \begin{proof}
+    Llamemos $\tqheta$ a la ecuación anterior. Así, al rectificar nuestra ecuación tenemos que que
+    \begin{eqnarray*}
+      rec(\theta) &=& \forall_{x'}\exists_{y'}\left(B(x', a) \land M(y', x')\right)
+      \rightarrow \exists_{z}\left(B(x, w) \land M (z, x)\right)\\
+      &=& \theta'
+    \end{eqnarrqay*}
+    encontrando la Forma Normal Negativa, tenemos que
+    \begin{eqnarray*}
+      fnn(\theta') &=& \neg \forall_{x'}\exists_{y'}\left(B(x', a) \land M(y', x')\right)
+      \lor \exists_{z}\left(B(x, w) \land M (z, x)\right)\\
+      &=& \exists_{x'}\forall_{y'}\left(\neg B(x', a) \lor \neg M(y', x')\right)
+      \lor \exists_{z}\left(B(x, w) \land M (z, x)\right)\\
+      &=& \theta''
+    \end{eqnarray*}
+    por último, encontremos la Forma Normal de Prennex, esto es
+    \begin{eqnarray*}
+      prennex(\theta'') &=& \exists_{z}\exists_{x'}\forall_{y'}\left(\neg B(x', a) \lor \neg M(y', x')\right)
+      \lor \left(B(x, w) \land M (z, x)\right)
+    \end{eqnarray*}
+  \end{proof}
+\end{itemize}
 \end{document}
