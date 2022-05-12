@@ -1,0 +1,292 @@
+\documentclass{article}
+
+% Symbols
+\usepackage[T1]{fontenc}
+\usepackage{upgreek}
+\usepackage{physics}
+\usepackage{cancel}
+\usepackage{amsfonts, amsthm}
+\usepackage{amssymb, latexsym, amsmath}
+
+
+% Proof
+\renewcommand*{\proofname}{\textbf{Soluci\'on:}}
+
+% Theorem
+\newtheorem*{theorem}{Teorema}
+
+%Algorithms
+\usepackage[ruled,lined,linesnumbered,commentsnumbered]{algorithm2e}
+
+%% Identación
+\setlength{\parindent}{0cm}
+
+% Código
+\newcommand{\code}[1]{\textcolor{white!25!black}{\texttt{#1}}}
+\usepackage{listings}
+
+%AMS
+\usepackage{amsthm}
+\newtheorem{algo-thm}{Algoritmo}
+
+% Graphics
+\usepackage{graphicx}
+\usepackage{pgf}
+
+% Margins
+\addtolength{\voffset}{-1.5cm}
+\addtolength{\hoffset}{-1.5cm}
+\addtolength{\textwidth}{3cm}
+\addtolength{\textheight}{3cm}
+
+%Header-Footer
+\usepackage{fancyhdr}
+\renewcommand{\headrulewidth}{1pt}
+
+\newcommand{\set}[1]{
+  \left\{ #1 \right\}
+}
+
+\footskip = 50pt
+\renewcommand{\headrulewidth}{1pt}
+
+\pagestyle{fancyplain}
+
+\begin{document}
+\title{UNIVERSIDAD NACIONAL AUT\'ONOMA DE M\'EXICO\\ Facultad de Ciencias}
+\author{Autor: Adri\'an Aguilera Moreno}
+\date{}
+\maketitle
+\begin{center}
+  \includegraphics[scale=0.20]{../Imagen/Portada.jpg}\\[0.4cm]
+  \Large
+  \bf{Lógica Computacional}
+  \normalsize
+\end{center}
+\newpage
+\fancyhead[r]{ Lógica Computacional 2022-2}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{\LARGE{Semanal 9}}
+Para cada uno de los siguientes ejercicios, \textbf{justifica ampliamente} tu respuesta.
+
+\vspace*{0.5cm}
+1. \textbf{Decide} si los siguientes conjuntos son unificables, aplicando paso a paso el algoritmo de
+Martelli-Montanari.
+\newcommand{\localtextbulletone}{\textcolor{black}{\raisebox{.45ex}{\rule{.6ex}{.6ex}}}}
+\renewcommand{\labelitemi}{\localtextbulletone}
+\begin{itemize}
+  % -------------------------------- Ejercicio 1.1
+\item $W = \{Q\big(a,x, g(a,b,c)\big), Q\big(a, f(x), g(a,b,y)), Q\big(a, f(f(w)\big), g(a, x, g(c, b, a)\big)\}$
+  \begin{proof} Ejecutando el algoritmo de \textbf{Martelli-Montanari}, tenemos que
+    
+    \textbf{I}.
+    \begin{eqnarray}
+      & \{Q\big(a, x, g(a, b, c)\big) = Q\big(a, f(f(w)), g(a, x, g(c, b, a))\big)\} &\\
+      & \{a = a, x = f(f(w)), g(a,b,c) = g(a, x, g(c, b, a))\} &\\
+      & \{x = f(f(w)), g(a,b,c) = g(a, x, g(c, b, a))\} &\\
+      & \{f(f(w)) = f(f(w)), g(a,b,c) = g(a, x, g(c, b, a))\} &\\
+      & \{f(w) = f(w), g(a,b,c) = g(a, f(f(w)), g(c, b, a))\} &\\
+      & \{w = w, g(a,b,c) = g(a, f(f(w)), g(c, b, a))\} &\\
+      & \{g(a,b,c) = g(a, f(f(w)), g(c, b, a))\} &\\
+      & \{a = a, b = f(f(w)), c = g(c, b, a)\} &\\
+      & \{b = f(f(w)), c = g(c, b, a)\} &\\
+      & \{f(f(w)) = b, c = g(c, b, a)\} &\\
+      & \square &
+    \end{eqnarray}
+    2. Descomposición.
+
+    3. Eliminación.
+
+    4. Sustitución $[x := f(f(w))]$.
+
+    5. Descomposición.
+
+    6. Descomposición.
+
+    7. Eliminación.
+
+    8. Descomposición.
+
+    9. Eliminación.
+    
+    10. Swap.
+    
+    11. Descomposición fállida.
+
+    \[\therefore\;\; W \text{ no es unificable.}\]
+  \end{proof}
+  \newpage
+  % -------------------------------- Ejercicio 1.2
+\item $W = \{P\big(x, f(y)\big), P\big(g(y,a), f(b)\big), P\big(g(b,z), w\big)\}$
+  \begin{proof} Ejecutando el algoritmo de \textbf{Martelli-Montanari}, tenemos que
+    
+    \textbf{I}.
+    \begin{eqnarray*}
+      & \{P\big(g(y,a), f(b)\big) = P\big(g(b,z), w\big)\} &\\
+      & \{g(y,a) = g(b,z), f(b) = w\} &
+      \hspace*{1cm} \text{Descomposición.}\\
+      & \{y = b, a = z, f(b) = w \} &
+      \hspace*{1cm} \text{Descomposición.}\\
+      & \{b = b, a = z, f(b) = w\} &
+      \hspace*{0.8cm} \text{Sustitución } [y := b].\\
+      & \{a = z, f(b) = w\} &
+      \hspace*{1.4cm} \text{Eliminación.}\\
+      & \{z = a, f(b) = w\} &
+      \hspace*{1.9cm} \text{Swap.}\\
+      & \{a = a, f(b) = w\} &
+      \hspace*{0.75cm} \text{Sustitución } [z := a].\\
+      & \{f(b) = w\} &
+      \hspace*{1.5cm} \text{Eliminación.}\\
+      & \{f(b) = f(b)\} &
+      \hspace*{0.55cm} \text{Sustitución } [w := f(b)].\\
+      & \{b = b\} &
+      \hspace*{1.18cm} \text{Descomposición.}\\
+      & \emptyset &
+      \hspace*{1.5cm} \text{Eliminación.}
+    \end{eqnarray*}
+    \[ \therefore\;\; \mu_{1} = [y := b][z := a][w := f(b)].\]
+    \textbf{II}. Aplicamos la sustitución a $W$\footnote{Nótese que al ser un conjunto, este no
+    admite elementos repetidos.} la sustitución $\mu_{1}$. Así,
+    \[\Rightarrow W \mu_{1} = W' = \{P(x, f(b)), P(g(b, a), f(b))\}.\]
+    \textbf{III}.
+    \begin{eqnarray*}
+      & \{P\big(x, f(b)\big) = P\big(g(b,a), f(b)\big)\} &\\
+      & \{x = g(b,a), f(b) = f(b)\} &
+      \hspace*{1.72cm} \text{Descomposición.}\\
+      & \{g(b,a) = g(b,a), f(b) = f(b)\} &
+      \hspace*{1cm} \text{Sustitución } [x := g(b,a)].\\
+      & \{b = b, a = a, f(b) = f(b)\} &
+      \hspace*{1.71cm} \text{Descomposición.}\\
+      & \{a = a, f(b) = f(b)\} &
+      \hspace*{2.1cm} \text{Eliminación.}\\
+      & \{f(b) = f(b)\} &
+      \hspace*{2.1cm} \text{Eliminación.}\\
+      & \{b = b\} &
+      \hspace*{1.8cm} \text{Descomposición.}\\
+      & \emptyset &
+      \hspace*{2.1cm} \text{Eliminación.}
+    \end{eqnarray*}
+    \[\therefore\;\; \text{W es unificable.}\]
+    \[\therefore\;\; \mu = \mu_{1}[x := g(b,a)] \text{ es el \textbf{UMG} (la composición de las sustituciones) de } W.\]
+  \end{proof}
+\end{itemize}
+% -------------------------------------- Ejercicio 2
+\newpage
+2. Usando el algoritmo de unificación de Martelli-Montanari, encuentra para el siguiente
+conjunto de expresiones el \textbf{umg}, y si no tiene, explica por qué. Indica la regla que se
+utiliza en cada paso del algoritmo.
+
+\begin{eqnarray*}
+  E = \{S\big(f(z), x, g(h(a, b)), g(c)\big), S\big(f(g(y)), z, w, g(y)\big), S\big(u, v, w, z\big)\}
+\end{eqnarray*}
+\begin{proof} Ejecutando el algoritmo de \textbf{Martelli-Montanari}, tenemos que
+
+  \textbf{I}.
+  \begin{eqnarray*}
+    & \{S\big(f(z), x, g(h(a,b)), g(c)\big) = S\big(u, v, w, z\big)\} &\\
+    & \{f(z) = u, x = v, g(h(a,b)) = w, g(c) = z\} &
+    \hspace*{1cm} \text{Descomposición.}\\
+    & \{u = f(z), x = v, g(h(a,b)) = w, g(c) = z\} &
+    \hspace*{1.8cm} \text{Swap.}\\
+    & \{f(z) = f(z), x = v, g(h(a,b)) = w, g(c) = z\} &
+    \hspace*{0.6cm} \text{Sustitución } [u := f(z)].\\
+    & \{z = z, x = v, g(h(a,b)) = w, g(c) = z\} &
+    \hspace*{1.1cm} \text{Descomposición.}\\
+    & \{x = v, g(h(a,b)) = w, g(c) = z\} &
+    \hspace*{1.45cm} \text{Eliminación.}\\
+    & \{v = v, g(h(a,b)) = w, g(c) = z\} &
+    \hspace*{0.8cm} \text{Sustitución } [x := v].\\
+    & \{g(h(a,b)) = w, g(c) = z\} &
+    \hspace*{1.45cm} \text{Eliminación.}\\
+    & \{w = g(h(a,b)), g(c) = z\} &
+    \hspace*{1.95cm} \text{Swap.}\\
+    & \{g(h(a,b)) = g(h(a,b)), g(c) = z\} &
+    \hspace*{0.2cm} \text{Sustitución } [w := g(h(a, b))].\\
+    & \{h(a,b) = h(a,b), g(c) = z\} &
+    \hspace*{1.2cm} \text{Descomposición.}\\
+    & \{a = a, b = b, g(c) = z\} &
+    \hspace*{1.2cm} \text{Descomposición.}\\
+    & \{b = b, g(c) = z\} &
+    \hspace*{1.45cm} \text{Eliminación.}\\
+    & \{g(c) = z\} &
+    \hspace*{1.45cm} \text{Eliminación.}\\
+    & \{z = g(c)\} &
+    \hspace*{1.94cm} \text{Swap.}\\
+    & \{g(c) = g(c)\} &
+    \hspace*{0.7cm} \text{Sustitución } [z := g(c)].\\
+    & \{c = c\} &
+    \hspace*{1.2cm} \text{Descomposición.}\\
+    & \emptyset &
+    \hspace*{1.45cm} \text{Eliminación.}
+  \end{eqnarray*}
+  \begin{eqnarray*}
+    \therefore\;\; \sigma_{1} &=& [u := f(z)][x := v][w := g(h(a, b))][z := g(c)]\\
+    &=& [u, x, w, z := f(g(c)), v, g(h(a, b)), g(c)].
+  \end{eqnarray*}
+  \textbf{II}. Aplicamos la sustitución a $E$ la sustitución $\sigma_{1}$ . Así,
+  \begin{eqnarray*}
+    \Rightarrow E \sigma_{1} &=& E'\\
+    &=& \{S\big(f(g(c)), v, g(h(a, b)), g(c)\big) = S\big(f(g(y), g(c), g(h(a,b))), g(y)\big)\}
+  \end{eqnarray*}
+  \textbf{III}.
+  \setcounter{equation}{0}
+  \begin{eqnarray}
+    & \{S\big(f(g(c)), v, g(h(a, b)), g(c)\big) = S\big(f(g(y)), g(c), g(h(a,b))), g(y)\big)\} &\\
+    & \{f(g(c)) = f(g(y)), v = g(c), g(h(a, b)) = g(h(a,b))), g(c) = g(y)\} &\\
+    & \{g(c) = g(y), v = g(c), g(h(a, b)) = g(h(a,b))), g(c) = g(y)\} &\\
+    & \{c = y, v = g(c), g(h(a, b)) = g(h(a,b))), g(c) = g(y)\} &\\
+    & \{y = c, v = g(c), g(h(a, b)) = g(h(a,b))), g(c) = g(y)\} &\\
+    & \{c = c, v = g(c), g(h(a, b)) = g(h(a,b))), g(c) = g(y)\} &\\
+    & \{v = g(c), g(h(a, b)) = g(h(a,b))), g(c) = g(y)\} &\\
+    & \{g(c) = g(c), g(h(a, b)) = g(h(a,b))), g(c) = g(y)\} &\\
+    & \{c = c, g(h(a, b)) = g(h(a,b))), g(c) = g(c)\} &\\
+    & \{g(h(a, b)) = g(h(a,b))), g(c) = g(c)\} &\\
+    & \{h(a, b) = h(a,b)), g(c) = g(c)\} &\\
+    & \{a = a, b = b, g(c) = g(c)\} &\\
+    & \{b = b, g(c) = g(c)\} &\\
+    & \{ g(c) = g(c)\} &\\
+    & \{ c = c\} &\\
+    & \emptyset &
+  \end{eqnarray}
+  2. Descomposición.
+  
+  3. Descomposición. 
+  
+  4. Descomposición.
+  
+  5. Swap.
+  
+  6. Sustitución $[y := c]$.
+  
+  7. Eliminación.
+  
+  8. Sustitución $[v := g(c)]$.
+  
+  9. Descomposición.
+  
+  10. Eliminación.
+  
+  11. Descomposición.
+  
+  12. Descomposición.
+  
+  13. Eliminación.
+  
+  14. Eliminación.
+  
+  15. Descomposición.
+  
+  16. Eliminación.
+  \[\therefore\;\; W \text{ es unificable.}\]
+  \begin{eqnarray*}
+    \sigma &=& \sigma_{1}[y := c][v := g(c)]\\
+    &=& [u, x, w, z := f(g(c)), v, g(h(a, b)), g(c)][y := c][v := g(c)]\\
+    &=& [u, x, w, z, y, v := f(g(c)), g(c), g(h(a, b)), g(c), c, g(c)].
+  \end{eqnarray*}
+  Se obvia que $\sigma$ es el UMG. Pues, cualquier sustitución extra funge como
+  identidad y se cumple que para alguna sustitución $\tau$ sucede que $\sigma\tau = \sigma$.
+  
+  Además, el algoritmo de unificación de Martelli-Montanari nos garantiza que regresa el unificador
+  más general.
+\end{proof}
+\end{document}
