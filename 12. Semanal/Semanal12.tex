@@ -1,0 +1,241 @@
+\documentclass{article}
+
+% Symbols
+\usepackage{amsfonts, amsthm}
+\usepackage{upgreek}
+\usepackage{physics}
+\usepackage{cancel}
+\usepackage{amssymb, latexsym, amsmath}
+\usepackage{amsmath}
+\usepackage{listings}
+
+%Algorithms
+\usepackage[ruled,lined,linesnumbered,commentsnumbered]{algorithm2e}
+
+%% Semantic
+\usepackage[inference]{semantic}
+
+%% Identación
+\setlength{\parindent}{0cm}
+
+% Código
+\newcommand{\code}[1]{\textcolor{white!25!black}{\texttt{#1}}}
+\usepackage{listings}
+
+%AMS
+\usepackage{amsthm}
+\newtheorem{algo-thm}{Algoritmo}
+
+% Proof
+\renewcommand*{\proofname}{\textbf{Demostraci\'on:}}
+
+% Theorem
+\newtheorem*{theorem}{Teorema}
+
+% Hipervínculos:
+\usepackage{hyperref}
+
+% Graphics
+\usepackage{graphicx}
+\usepackage{pgf}
+
+% Color a letras.
+%\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+
+% Tikz
+\usepackage{tkz-graph}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata}
+%\usetikzlibrary[topaths]
+
+% Def. Dr. César.
+\usetikzlibrary{shapes,calc}
+\tikzstyle{edge}=[shorten <=2pt, shorten >=2pt, >=stealth, line width=1.1pt]
+\tikzstyle{blueE}=[shorten <=2pt, shorten >=2pt, >=stealth, line width=1.5pt, blue]
+\tikzstyle{blackV}=[circle, fill=black, minimum size=6pt, inner sep=0pt, outer sep=0pt]
+\tikzstyle{blueV}=[circle, fill=blue, draw, minimum size=6pt, line width=0.75pt, inner sep=0pt, outer sep=0pt]
+\tikzstyle{redV}=[circle, fill=red, draw, minimum size=6pt, line width=0.75pt, inner sep=0pt, outer sep=0pt]
+\tikzstyle{redSV}=[semicircle, fill=red, minimum size=3pt, inner sep=0pt, outer sep=0pt, rotate=225]
+\tikzstyle{blueSV}=[semicircle, fill=blue, minimum size=3pt, inner sep=0pt, outer sep=0pt, rotate=225]
+\tikzstyle{blackSV}=[semicircle, fill=black, minimum size=3pt, inner sep=0pt, outer sep=0pt, rotate=225]
+\tikzstyle{vertex}=[circle, draw, minimum size=6pt, line width=0.75pt, inner sep=0pt, outer sep=0pt]
+
+% Margins
+\addtolength{\voffset}{-1.5cm}
+\addtolength{\hoffset}{-1.5cm}
+\addtolength{\textwidth}{3cm}
+\addtolength{\textheight}{3cm}
+
+%Header-Footer
+\usepackage{fancyhdr}
+\renewcommand{\headrulewidth}{1pt}
+
+\newcommand{\set}[1]{
+  \left\{ #1 \right\}
+}
+
+%\pagenumbering{gobble} -- Este comando
+%                       -- quita el número de página.
+\footskip = 50pt
+\renewcommand{\headrulewidth}{1pt}
+
+\pagestyle{fancyplain}
+
+%% Bibliografía APA
+\usepackage[backend=biber]{biblatex}
+\bibliography{./Bibliografia/BaseDatos}
+
+\begin{document}
+\title{UNIVERSIDAD NACIONAL AUT\'ONOMA DE M\'EXICO\\ Facultad de Ciencias}
+\author{Autor: Adri\'an Aguilera Moreno}
+
+\date{}
+\maketitle
+\begin{center}
+  \includegraphics[scale=0.20]{../Imagen/Portada.jpg}\\[0.4cm]
+  \Large
+  \bf{Lógica Computacional}
+  \normalsize
+\end{center}
+\newpage
+\fancyhead[r]{ Lógica Computacional 2022-2}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{\LARGE{Semanal 12}}
+Para cada uno de los siguientes ejercicios, \textbf{justifica ampliamente} tu respuesta.
+\newline
+\newline
+\textbf{Desmuestra} la consecuencia lógica de los siguientes usando tácticas:
+\newcommand{\localtextbulletone}{\textcolor{black}{\raisebox{.45ex}{\rule{.6ex}{.6ex}}}}
+\renewcommand{\labelitemi}{\localtextbulletone}
+\begin{itemize}
+\item
+  \[\mathrm{H:\; (A \rightarrow C)\land(B \rightarrow C) \vdash A \lor B \rightarrow C}\]
+\item
+  \[\mathrm{H_1\;:\; \exists_{x} Qx,\; H_2\;:\; \forall_{x}(Qx \land \exists_{y} Py
+    \rightarrow Qfx),\; H_3\;:\;\forall_{z}(Qz \rightarrow Qgz) \vdash Pb \rightarrow \exists_{w} Qfgw}\]
+\end{itemize}
+Demostración para el primer punto (diagrama de árbol)\footnote{Se realiza razonamiento hacia atrás.}:
+\[
+\inference*[(Intro)]{
+  \inference*[(destruct)]{
+    \inference*[(Apply)]{\inference*[]{\text{Assumption} \checkmark}{\Gamma, A \vdash A }
+     }{\hspace*{0.5cm} \Gamma, A \vdash C \hspace*{0.5cm}}
+    &
+    \inference*[(Apply)]{
+    \inference*[]{\text{Assumption} \checkmark}{\Gamma, B \vdash B}}{\hspace*{.5cm} \Gamma, B \vdash C \hspace*{.5cm}}}
+             {\hspace*{3cm} \Gamma, A \lor B \vdash C \hspace*{3cm}}}
+           {\hspace*{1.2cm}\Gamma \vdash A \lor B \rightarrow C\hspace*{0.5cm}}
+           \]
+Para $\Gamma = \{A \rightarrow C, B \rightarrow C\}$. 
+
+De manera secuencial sería
+\begin{enumerate}
+\item \code{Intro}: $\vdash (A \rightarrow C) \rightarrow (B \rightarrow C) \rightarrow A \lor B \rightarrow C
+  \;\; \rhd\;\; (A \rightarrow C) \vdash (B \rightarrow C) \rightarrow A \lor B \rightarrow C$
+\item \code{Intro}: $(A \rightarrow C) \vdash (B \rightarrow C) \rightarrow A \lor B \rightarrow C
+  \hspace*{0.65cm}\rhd\;\; (A \rightarrow C), (B \rightarrow C) \vdash A \lor B \rightarrow C$
+\item \code{Intro}: $(A \rightarrow C), (B \rightarrow C) \vdash A \lor B \rightarrow C
+  \hspace*{1.05cm}\rhd\;\; (A \rightarrow C), (B \rightarrow C), (A \lor B) \vdash C$
+\item \code{destruc}: $(A \rightarrow C), (B \rightarrow C), (A \lor B) \vdash C
+  \hspace*{0.825cm}\rhd\;\; \Gamma, A \vdash C \; ;\; \Gamma, B \vdash C$
+\item \code{Apply}: $\;\Gamma, A \vdash C \; ;\; \Gamma, B \vdash C \hspace*{3cm}\rhd\;\; \Gamma, A \vdash A \; ;\; \Gamma, B \vdash B$
+\item \code{Assumption}: $\;\Gamma, A \vdash A \; ;\; \Gamma, B \vdash B \hspace*{2.1cm}\rhd\; \square$
+\end{enumerate}
+Algunas observaciones:
+\newline
+1. En la demostración por árbol se dan por hecho los pasos 1 y 2.
+\newline
+2. El paso 4 destruye una disyunción.
+\newline
+3. El paso 5 es realmente un \code{Apply} simultáneo.
+\newline
+4. El paso 6 es relamente un \code{Assumption} simultáneo.
+\newline
+5. Me faltó especificar a que hipótesis se le aplica cada regla, pero en el árbol las marco.
+\hfill $\square$
+\newline
+\newline
+Demostración para el punto 2 (diagrama de árbol):
+\[
+\inference*[]{
+  \inference*[]{
+    \inference*[]{
+      \inference*[]{
+        \inference*[]{
+          \inference*[]{
+            \inference*[]{
+              \inference*[]{\text{Assumption \checkmark}}{\Gamma'', Qt \vdash Qt}
+            }{\Gamma'' \vdash Qt \;\; \text{(Destruct)}}
+          }{\Gamma', Qt \rightarrow Qgt \vdash Qgt \;\; \text{(Apply)}}
+        }{\hspace*{0.8cm} \Gamma' \vdash Qgt \;\; \text{(Destruct)} \hspace*{0.5cm}}
+        &
+        \inference*[]{
+          \inference*[]{\text{Assumption} \checkmark}{\Gamma' \vdash Pb}
+        }{\Gamma' \vdash \exists_y Py \;\; \text{(Exists)}}
+      }{\hspace*{2cm} \Gamma, Qgt \land \exists_y Py \rightarrow Qfgt, Pb \vdash Qfgt\;\; \text{(Apply)} \hspace*{2cm}}
+    }{\hspace*{3.5cm} \Gamma, Pb \vdash Qfgt \;\; \text{(Destruct)}\hspace*{3.5cm}}
+  }{\Gamma, Pb \vdash \exists_{w}Qfgw \;\; \text{(Exists)}}
+}{\Gamma \vdash Pb \rightarrow \exists_{w}Qfgw \;\;\text{(Intro)}}
+\]
+Para $\Gamma = \{\exists_x Qx, \forall_x (Qx \land \exists_y Py \rightarrow Qfx), \forall_z(Qz \rightarrow Qgz)\}$,
+$\Gamma' = \{\Gamma, Qgt \land \exists_y Py \rightarrow Qfgt, Pb\}$, y $\Gamma'' = \{\Gamma', Qt \rightarrow Qgt\}$.
+\newline
+Así, de manera secuencial sería
+\begin{enumerate}
+\item \code{Intro}: $\Gamma \vdash Pb \rightarrow \exists_{w}Qfgw
+  \hspace*{3.3cm} \rhd \hspace*{0.3cm}
+  \Gamma, Pb \vdash \exists_{w}Qfgw$
+\item \code{Exists}: $\Gamma, Pb \vdash \exists_{w}Qfgw
+  \hspace*{3.55cm} \rhd \hspace*{0.3cm}
+  \Gamma, Pb \vdash Qfgt$
+\item \code{Destruct}: $\Gamma, Pb \vdash Qfgt
+  \hspace*{3.75cm} \rhd \hspace*{0.3cm}
+  \Gamma, Qgt \land \exists_y Py \rightarrow Qfgt, Pb \vdash Qfgt$
+\item \code{Apply}: $\Gamma, Qgt \land \exists_y Py \rightarrow Qfgt, Pb \vdash Qfgt
+  \hspace*{1cm} \rhd \hspace*{0.3cm}
+  \Gamma' \vdash Qgt\;\; ;\;\; \Gamma' \vdash \exists_y Py$
+\item \code{Exists}: $\Gamma' \vdash Qgt\;\; ;\;\; \Gamma' \vdash \exists_y Py
+  \hspace*{2.72cm} \rhd \hspace*{0.3cm}
+  \Gamma' \vdash Qgt\;\; ;\;\; \Gamma' \vdash Pb$
+\item \code{Assumption}: $\Gamma' \vdash Qgt\;\; ;\;\; \Gamma' \vdash Pb
+  \hspace*{2.4cm} \rhd \hspace*{0.3cm}
+  \Gamma' \vdash Qgt\;\; ;\;\; \square$
+\item \code{Destruct}: $\Gamma' \vdash Qgt
+  \hspace*{4.5cm} \rhd \hspace*{0.3cm}
+  \Gamma', Qt \rightarrow Qgt \vdash Qgt$
+\item \code{Apply}: $\Gamma', Qt \rightarrow Qgt \vdash Qgt
+  \hspace*{3.35cm} \rhd \hspace*{0.3cm}
+  \Gamma'' \vdash Qt$
+\item \code{Destruct}: $\Gamma'' \vdash Qt
+  \hspace*{4.6cm} \rhd \hspace*{0.3cm}
+  \Gamma'', Qt \vdash Qt$
+\item \code{Assumption}: $\Gamma'', Qt \vdash Qt
+  \hspace*{3.67cm} \rhd \hspace*{0.3cm} \square$
+\end{enumerate}
+Algunas observaciones:
+\newline
+1. En el paso 2 se tiene un \code{Exists} con $t$.
+\newline
+2. El paso 3 destruye el para todo $H_2$.
+\newline
+3. En el paso 4 se aplica la hipótesis obtenida del paso 2.
+Aquí\footnote{En el paso 4.} se hacen dos pasos a la vez, pues se aplica el destructor
+de la conjunción.
+\newline
+4. El paso 6 funciona porque $Pb$ es parte de $\Gamma'$. Así, solo nos queda concluir
+por una de las ramas.
+\newline
+5. En el paso 7 se destruye el para todo de $H_3$.
+\newline
+6. El paso 8 aplica la nueva hipótesis obtenida del paso 7.
+\newline
+7. En el paso 9 se destruye el existencial de $H_1$. \hfill $\square$
+\newline
+\newline
+\textbf{Nota}: los demás pasos son más claros, no especifiqué más por el formato en el
+que dibujé los diagramas y realice los pasos en secuencia. Si llegara haber alguna duda
+agradecería que me preguntarán, pero entendería sino lo hicieran, en el examen trataré
+de hacer mir árboles más explícitos para no tener que explicar después.
+\end{document}
